@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="宋昀锟 Song Yunkun 的个人网站首页，聚焦 AI 教育产品、申请规划系统、RAG、Agent 工作流和全栈原型交付。"
+    />
+    <title>宋昀锟 Song Yunkun | AI Education Product Builder</title>
+    <link rel="stylesheet" href="./styles.css" />
+    <noscript><style>.ai-intro{display:none!important}</style></noscript>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">跳到正文</a>
+    <div class="grain" aria-hidden="true"></div>
+    <div class="scroll-progress" aria-hidden="true"></div>
+    <div class="cursor-glow" aria-hidden="true"></div>
+
+    <section class="ai-intro" id="aiIntro" aria-label="AI opening animation">
+      <canvas id="aiIntroCanvas" width="1600" height="1000" aria-hidden="true"></canvas>
+      <div class="ai-intro-grid" aria-hidden="true"></div>
+      <div class="ai-intro-scan" aria-hidden="true"></div>
+      <div class="ai-intro-flash" aria-hidden="true"></div>
+      <div class="ai-intro-portal" aria-hidden="true"></div>
+      <div class="ai-intro-core" aria-hidden="true">
+        <span class="core-pulse"></span>
+        <span class="core-ring core-ring-one"></span>
+        <span class="core-ring core-ring-two"></span>
+        <span class="core-ring core-ring-three"></span>
+      </div>
+      <div class="ai-intro-agents" aria-hidden="true">
+        <span style="--agent-x:18%;--agent-y:32%;--agent-delay:5.12s">Researching</span>
+        <span style="--agent-x:76%;--agent-y:26%;--agent-delay:5.28s">Planning</span>
+        <span style="--agent-x:21%;--agent-y:68%;--agent-delay:5.42s">Building</span>
+        <span style="--agent-x:72%;--agent-y:66%;--agent-delay:5.58s">Testing</span>
+        <span style="--agent-x:48%;--agent-y:76%;--agent-delay:5.72s">Advising</span>
+      </div>
+      <div class="ai-intro-copy">
+        <p class="intro-kicker">AI EDUCATION CORE</p>
+        <h2>Education intelligence online</h2>
+        <p class="intro-status" id="aiIntroStatus">EDUCATION CORE OFFLINE</p>
+      </div>
+      <div class="ai-intro-tokens" aria-hidden="true">
+        <span>student.profile.map()</span>
+        <span>education.rag.retrieve()</span>
+        <span>application.plan.route()</span>
+        <span>mentor.feedback.loop()</span>
+        <span>prototype.ship()</span>
+        <span>school.fit.score()</span>
+        <span>agent.workflow.run()</span>
+        <span>evidence.verify()</span>
+      </div>
+      <div class="ai-intro-keywords" aria-hidden="true">
+        <span>Student</span>
+        <span>Education</span>
+        <span>RAG</span>
+        <span>Agents</span>
+        <span>Prototype</span>
+        <span>Evidence</span>
+      </div>
+      <div class="ai-intro-caption" aria-hidden="true">
+        <span>Student Signal</span>
+        <span>Reasoning</span>
+        <span>Delivery</span>
+      </div>
+      <button class="ai-intro-skip" id="aiIntroSkip" type="button">Skip</button>
+    </section>
+
+    <div class="ambient-system" aria-hidden="true">
+      <canvas id="ambientCanvas" width="1600" height="1000"></canvas>
+      <div class="ambient-grid"></div>
+      <div class="ambient-scan"></div>
+      <div class="ambient-circuit"></div>
+      <div class="ambient-ribbons"><span></span><span></span><span></span></div>
+      <div class="ambient-labels">
+        <span>Student</span><span>Fit</span><span>RAG</span><span>Agent</span>
+        <span>Plan</span><span>Test</span><span>Export</span><span>Loop</span>
+      </div>
+      <div class="data-rain">
+        <span>student.signal.map()</span>
+        <span>school.fit.score()</span>
+        <span>rag.education.merge()</span>
+        <span>agent.plan.route()</span>
+        <span>tests.cover.advising()</span>
+        <span>export.application.pack()</span>
+      </div>
+    </div>
+
+    <header class="site-header" aria-label="Primary navigation">
+      <a class="brand" href="./index.html" aria-label="Song Yunkun home">
+        <span class="brand-mark" aria-hidden="true">SY</span>
+        <span>AI Education Console</span>
+      </a>
+      <nav class="top-nav" aria-label="Site pages">
+        <a href="./index.html">Home</a>
+        <a href="./about.html">About</a>
+        <a href="./work.html">Work</a>
+        <a href="./research.html">Research</a>
+        <a href="./novel.html">Novel</a>
+        <a href="./contact.html">Contact</a>
+      </nav>
+      <a class="button secondary header-resume magnetic" href="./assets/resume.docx">Resume</a>
+    </header>
+
+    <main id="main">
+      <section class="hero" id="top" aria-labelledby="hero-title">
+        <div class="hero-copy">
+          <p class="hero-kicker">AI Education Command Center / 申请规划系统 / 全栈原型</p>
+          <h1 id="hero-title">宋昀锟</h1>
+          <p class="hero-name">Song Yunkun</p>
+          <p class="hero-subtitle">
+            我把学生信号、AI 工作流和工程交付组织成可运行、可测试、可验证的教育产品系统。
+          </p>
+          <div class="hero-actions" aria-label="Primary actions">
+            <a class="button primary magnetic" href="./work.html">查看核心作品</a>
+            <a class="button secondary magnetic" href="./about.html">了解方法与经历</a>
+          </div>
+        </div>
+        <div class="hero-art" aria-label="生成式 AI 产品系统图谱">
+          <canvas id="networkCanvas" width="900" height="720" aria-hidden="true"></canvas>
+          <div class="scan-field" aria-hidden="true"></div>
+          <div class="orbit-rings" aria-hidden="true"><span></span><span></span><span></span></div>
+          <div class="signal-chips" aria-hidden="true">
+            <span>DeepSeek</span><span>RAG</span><span>SQLite</span><span>72 Tests</span>
+          </div>
+          <div class="network-inspector" aria-live="polite">
+            <span id="network-mode-label">Student Signal</span>
+            <p id="network-mode-copy">Student goals, activity records, and family context enter the system as moving nodes.</p>
+          </div>
+          <div class="art-panel" aria-label="Network modes">
+            <button class="network-mode is-active" type="button" data-network-mode="signal">Student</button>
+            <button class="network-mode" type="button" data-network-mode="rag">RAG</button>
+            <button class="network-mode" type="button" data-network-mode="agent">Agent</button>
+            <button class="network-mode" type="button" data-network-mode="tests">Evidence</button>
+            <button class="network-mode" type="button" data-network-mode="export">Export</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="proof-band reveal" aria-label="Product proof metrics">
+        <article data-metric data-tone="verify" tabindex="0" role="button" aria-expanded="false" aria-controls="metric-detail-one">
+          <strong data-count="72">72</strong>
+          <span>美本平台测试文件</span>
+          <p id="metric-detail-one">覆盖认证、RAG、规划、推荐、导出和页面布局的工程证据。</p>
+        </article>
+        <article data-metric data-tone="system" tabindex="0" role="button" aria-expanded="false" aria-controls="metric-detail-two">
+          <strong data-count="341">341</strong>
+          <span>需求与反馈分类</span>
+          <p id="metric-detail-two">把课堂、会议、申请、知识管理反馈拆成可执行需求池。</p>
+        </article>
+        <article data-metric data-tone="system" tabindex="0" role="button" aria-expanded="false" aria-controls="metric-detail-three">
+          <strong data-count="103">103</strong>
+          <span>澄清项</span>
+          <p id="metric-detail-three">用于追问用户、定义边界和判断真实教育场景。</p>
+        </article>
+        <article data-metric data-tone="growth" tabindex="0" role="button" aria-expanded="false" aria-controls="metric-detail-four">
+          <strong data-count="20000" data-suffix="+">20,000+</strong>
+          <span>内容浏览</span>
+          <p id="metric-detail-four">来自搜索曝光、内容结构和转化话术优化。</p>
+        </article>
+      </section>
+
+      <section class="section route-section" aria-labelledby="site-map-title">
+        <div class="section-intro reveal">
+          <h2 id="site-map-title">Start from the right page</h2>
+          <p>
+            首页只承担分流和定位。完整经历、核心案例、项目档案和联系方式分别进入独立页面，避免一个页面塞下所有信息。
+          </p>
+        </div>
+        <div class="route-grid">
+          <a class="route-card reveal" href="./about.html">
+            <span>01 / About</span>
+            <h3>经历与方法</h3>
+            <p>给招生官、导师和招聘方看的背景、判断方式、能力矩阵和教育产品方法论。</p>
+          </a>
+          <a class="route-card reveal" href="./work.html">
+            <span>02 / Work</span>
+            <h3>核心作品</h3>
+            <p>用三个最强案例展示 AI 教育、内容增长和招聘评估产品的交付能力。</p>
+          </a>
+          <a class="route-card reveal" href="./research.html">
+            <span>03 / Research</span>
+            <h3>论文研究</h3>
+            <p>把 Google Scholar 论文、DOI 记录、数模方法和教育研究转成可交互证据链。</p>
+          </a>
+          <a class="route-card reveal" href="./novel.html">
+            <span>04 / Novel</span>
+            <h3>AI 长篇小说</h3>
+            <p>《逆命天炉》展示 AI 辅助长篇创作、世界观系统、人物关系和章节结构设计。</p>
+          </a>
+          <a class="route-card reveal" href="./archive.html">
+            <span>05 / Archive</span>
+            <h3>项目档案</h3>
+            <p>把更多 AI demo、研究资产、工具原型和长期需求池做成可扫描证据墙。</p>
+          </a>
+          <a class="route-card reveal" href="./contact.html">
+            <span>06 / Contact</span>
+            <h3>联系入口</h3>
+            <p>快速找到邮箱、电话、Google Scholar、简历和适合继续沟通的场景。</p>
+          </a>
+        </div>
+      </section>
+
+      <section class="section work-section" aria-labelledby="featured-title">
+        <div class="section-intro narrow reveal">
+          <h2 id="featured-title">Featured work</h2>
+          <p>首页只保留精选摘要，完整案例进入 Work 页面。</p>
+        </div>
+        <div class="summary-grid">
+          <article class="summary-card reveal" data-card-tone="system">
+            <span>AI Product / Education</span>
+            <h3>AI 美本规划工作台</h3>
+            <p>学生档案、DeepSeek 规划、RAG 问答、院校百科、质量检查和 Word / JSON 导出。</p>
+          </article>
+          <article class="summary-card reveal" data-card-tone="growth">
+            <span>Growth Product</span>
+            <h3>小红书文案写作大师</h3>
+            <p>从 brief 到标题、正文、标签、发布建议和历史记录的内容生成工作流。</p>
+          </article>
+          <article class="summary-card reveal" data-card-tone="verify">
+            <span>AI Workflow / Recruiting</span>
+            <h3>AI Recruiting Assistant</h3>
+            <p>职位标准、简历解析、评分、面试指南、审计和人工最终决策的本地优先工作台。</p>
+          </article>
+        </div>
+        <div class="section-actions reveal">
+          <a class="button primary magnetic" href="./work.html">进入 Work</a>
+          <a class="button secondary magnetic" href="./archive.html">查看 Archive</a>
+        </div>
+      </section>
+    </main>
+
+    <script src="./script.js"></script>
+  </body>
+</html>

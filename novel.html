@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="《逆命天炉》是宋昀锟的 AI 辅助长篇玄幻小说项目，展示长篇叙事系统、世界观设定、人物关系和章节结构设计。"
+    />
+    <title>Novel | 逆命天炉</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body class="novel-site">
+    <a class="skip-link" href="#main">跳到正文</a>
+    <div class="grain" aria-hidden="true"></div>
+    <div class="scroll-progress" aria-hidden="true"></div>
+    <div class="cursor-glow" aria-hidden="true"></div>
+    <div class="ambient-system novel-ambient" aria-hidden="true">
+      <canvas id="ambientCanvas" width="1600" height="1000"></canvas>
+      <div class="ambient-grid"></div>
+      <div class="ambient-scan"></div>
+      <div class="ambient-circuit"></div>
+      <div class="ambient-ribbons"><span></span><span></span><span></span></div>
+      <div class="ambient-labels">
+        <span>炉</span><span>灰</span><span>火</span><span>名</span>
+        <span>灯</span><span>证</span><span>账</span><span>活</span>
+      </div>
+      <div class="data-rain">
+        <span>炉灰作证</span>
+        <span>活证开册</span>
+        <span>旧名反问</span>
+        <span>无名火债</span>
+        <span>空座还灯</span>
+        <span>冷令问活死</span>
+      </div>
+    </div>
+
+    <header class="site-header" aria-label="Primary navigation">
+      <a class="brand" href="./index.html" aria-label="Song Yunkun home">
+        <span class="brand-mark" aria-hidden="true">SY</span>
+        <span>AI Education Console</span>
+      </a>
+      <nav class="top-nav" aria-label="Site pages">
+        <a href="./index.html">Home</a>
+        <a href="./about.html">About</a>
+        <a href="./work.html">Work</a>
+        <a href="./research.html">Research</a>
+        <a href="./novel.html">Novel</a>
+        <a href="./contact.html">Contact</a>
+      </nav>
+      <a class="button secondary header-resume magnetic" href="./assets/resume.docx">Resume</a>
+    </header>
+
+    <main id="main" class="subpage-main novel-page">
+      <section class="page-masthead novel-masthead" id="top" aria-labelledby="novel-title">
+        <p class="hero-kicker">AI Novel / Xianxia Systems / Long-form Fiction</p>
+        <h1 id="novel-title">《逆命天炉》</h1>
+        <p>
+          一部长篇 AI 辅助玄幻小说：林烬从丹房炉灰中起身，用炉、灰、火、名、灯、证、账构成的旧法系统，
+          一步步反推宗门、旧族、苏氏与青岚旧债。
+        </p>
+        <div class="hero-actions" aria-label="Novel actions">
+          <a class="button primary magnetic" href="#story-map">看结构拆解</a>
+          <a class="button secondary magnetic" href="#creative-system">看创作系统</a>
+        </div>
+      </section>
+
+      <section class="proof-band reveal novel-proof" aria-label="Novel proof metrics">
+        <article data-metric data-tone="verify" tabindex="0" role="button" aria-expanded="false" aria-controls="novel-metric-one">
+          <strong data-count="133">133</strong>
+          <span>已成章节</span>
+          <p id="novel-metric-one">从“炉灰里的命数”推进到“冷令问活死”，已形成连续长篇。</p>
+        </article>
+        <article data-metric data-tone="system" tabindex="0" role="button" aria-expanded="false" aria-controls="novel-metric-two">
+          <strong data-count="237025">237,025</strong>
+          <span>正文字符</span>
+          <p id="novel-metric-two">用于验证长篇节奏、世界观一致性和持续产出能力。</p>
+        </article>
+        <article data-metric data-tone="growth" tabindex="0" role="button" aria-expanded="false" aria-controls="novel-metric-three">
+          <strong data-count="1716">1,716</strong>
+          <span>平均章长</span>
+          <p id="novel-metric-three">短章高推进，适合移动端阅读和连续追更。</p>
+        </article>
+        <article data-metric data-tone="research" tabindex="0" role="button" aria-expanded="false" aria-controls="novel-metric-four">
+          <strong>6</strong>
+          <span>主线阶段</span>
+          <p id="novel-metric-four">外门逆袭、丹堂审证、南院出山、正堂开炉、苏氏旧账、旧药市新篇。</p>
+        </article>
+      </section>
+
+      <section class="section novel-position-section" aria-labelledby="position-title">
+        <div class="section-intro reveal">
+          <h2 id="position-title">What it shows</h2>
+          <p>这个项目不只是“我写了一本小说”，而是展示我如何用 AI 协作完成长篇叙事系统设计。</p>
+        </div>
+        <div class="route-grid novel-signal-grid">
+          <article class="route-card reveal">
+            <span>Worldbuilding</span>
+            <h3>法则不是背景，是剧情发动机</h3>
+            <p>炉、灰、火、名、灯、证、账不是装饰词，而是审判、修炼、身份和旧债的运转规则。</p>
+          </article>
+          <article class="route-card reveal">
+            <span>Character System</span>
+            <h3>人物功能清晰</h3>
+            <p>林烬负责证据反杀，苏晚晴负责雪线和苏氏旧令，姜拂雪负责药、活脉和生死判断。</p>
+          </article>
+          <article class="route-card reveal">
+            <span>AI Collaboration</span>
+            <h3>用 AI 扩展产能，靠结构守住一致性</h3>
+            <p>核心难点不是生成句子，而是维持伏笔、术语、人物决策和每章钩子的长期一致。</p>
+          </article>
+          <article class="route-card reveal">
+            <span>Product Sense</span>
+            <h3>把读者体验当系统设计</h3>
+            <p>短章、强悬念、阶段性审证和地图切换，让长篇像一个持续迭代的叙事产品。</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section novel-map-section" id="story-map" aria-labelledby="story-map-title">
+        <div class="section-intro reveal">
+          <h2 id="story-map-title">Story map</h2>
+          <p>我把 133 章拆成六个阅读阶段，方便访客快速理解这部长篇的推进方式。</p>
+        </div>
+        <div class="novel-arc-list">
+          <article class="novel-arc reveal">
+            <span>001-016</span>
+            <h3>外门逆袭与黑松秘境</h3>
+            <p>林烬从丹房杂役觉醒归墟天炉，打破废物标签，进入黑松秘境，牵出旧井、青火证令和第三炉。</p>
+          </article>
+          <article class="novel-arc reveal">
+            <span>017-037</span>
+            <h3>第三炉与丹堂审证</h3>
+            <p>爽点从个人反杀转向制度反咬，丹堂、灰库、问火台和炉灰作证共同构成第一轮大审判。</p>
+          </article>
+          <article class="novel-arc reveal">
+            <span>038-060</span>
+            <h3>雪血、南院、三人出山</h3>
+            <p>林烬、苏晚晴、姜拂雪形成稳定三人组；雪线、血契、第二火、第三火把冲突推向更大的旧账。</p>
+          </article>
+          <article class="novel-arc reveal">
+            <span>061-080</span>
+            <h3>活证开册与正堂开炉</h3>
+            <p>“活证、旧名、炉眼、七灯、半碗灰”成为关键词，主角开始逼系统承认证据。</p>
+          </article>
+          <article class="novel-arc reveal">
+            <span>081-120</span>
+            <h3>苏氏线与无名火债</h3>
+            <p>洗剑池、旧护指、灶房、烬名、赤金灯、空座还灯，核心问题转向林烬的名字和来源。</p>
+          </article>
+          <article class="novel-arc reveal">
+            <span>121-133</span>
+            <h3>旧药市与灯坟新篇</h3>
+            <p>故事从宗门与剑冢转入旧药市、无灯铺、灯坟，当前停在“先找断掌”的新谜题入口。</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section novel-excerpt-section" aria-labelledby="excerpt-title">
+        <div class="section-intro narrow reveal">
+          <h2 id="excerpt-title">Selected lines</h2>
+          <p>只放少量短摘，让读者感受语气，不把正文直接堆到个人网站里。</p>
+        </div>
+        <div class="excerpt-grid">
+          <blockquote class="excerpt-card reveal">
+            <p>炉灰终究会被风吹散，可炉火不会。</p>
+            <cite>第三章 黑松林的猎人</cite>
+          </blockquote>
+          <blockquote class="excerpt-card reveal">
+            <p>从这一刻起，井外也成了战场。</p>
+            <cite>第十一章 井外留影</cite>
+          </blockquote>
+          <blockquote class="excerpt-card reveal">
+            <p>活人吃饭，灯才有归处。</p>
+            <cite>第一百二十三章 井水照线</cite>
+          </blockquote>
+        </div>
+      </section>
+
+      <section class="section novel-system-section" id="creative-system" aria-labelledby="creative-system-title">
+        <div class="section-intro reveal">
+          <h2 id="creative-system-title">Creative system</h2>
+          <p>这页重点展示方法：AI 不是替代作者，而是被纳入一套长篇生产和校验流程。</p>
+        </div>
+        <div class="system-path novel-system-path" style="--path-progress: 0">
+          <article class="path-step reveal" data-path-step="0"><span>Concept</span><p>确定核心差异：证据链式仙侠，爽点来自“拿证据反杀规则”。</p></article>
+          <article class="path-step reveal" data-path-step="1"><span>Lexicon</span><p>建立炉、灰、火、名、灯、证、账等术语体系，确保每个词都承担剧情功能。</p></article>
+          <article class="path-step reveal" data-path-step="2"><span>Arc Map</span><p>按卷管理地图、敌人、谜题、阶段性胜利和下一轮悬念。</p></article>
+          <article class="path-step reveal" data-path-step="3"><span>Draft Loop</span><p>用 AI 扩展章节产能，再以人物动机、伏笔连续性和章尾钩子校验。</p></article>
+          <article class="path-step reveal" data-path-step="4"><span>Review</span><p>检查术语疲劳、节奏压迫、阶段性回报和人物功能重复。</p></article>
+          <article class="path-step reveal" data-path-step="5"><span>Publish</span><p>个人网站只放项目级展示，正文可后续拆成试读页、设定集或章节目录。</p></article>
+        </div>
+      </section>
+    </main>
+    <script src="./script.js"></script>
+  </body>
+</html>

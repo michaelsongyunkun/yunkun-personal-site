@@ -1,0 +1,9 @@
+services:
+  - type: web
+    name: yunkun-personal-site
+    runtime: static
+    buildCommand: mkdir -p dist && cp -R index.html about.html work.html research.html novel.html archive.html contact.html styles.css script.js assets dist/
+    staticPublishPath: ./dist
+    autoDeployTrigger: commit
+    domains:
+      - yunkun.us-application-consultant.com

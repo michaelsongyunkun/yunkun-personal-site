@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="宋昀锟 Song Yunkun 的核心作品页面：AI 美本规划工作台、小红书文案写作大师、AI Recruiting Assistant。" />
+    <title>Work | 宋昀锟 Song Yunkun</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">跳到正文</a>
+    <div class="grain" aria-hidden="true"></div>
+    <div class="scroll-progress" aria-hidden="true"></div>
+    <div class="cursor-glow" aria-hidden="true"></div>
+    <div class="ambient-system" aria-hidden="true">
+      <canvas id="ambientCanvas" width="1600" height="1000"></canvas>
+      <div class="ambient-grid"></div><div class="ambient-scan"></div><div class="ambient-circuit"></div>
+      <div class="ambient-ribbons"><span></span><span></span><span></span></div>
+      <div class="ambient-labels"><span>Student</span><span>Fit</span><span>RAG</span><span>Agent</span><span>Plan</span><span>Test</span><span>Export</span><span>Loop</span></div>
+      <div class="data-rain"><span>student.signal.map()</span><span>school.fit.score()</span><span>rag.education.merge()</span><span>agent.plan.route()</span><span>tests.cover.advising()</span><span>export.application.pack()</span></div>
+    </div>
+    <header class="site-header" aria-label="Primary navigation">
+      <a class="brand" href="./index.html" aria-label="Song Yunkun home"><span class="brand-mark" aria-hidden="true">SY</span><span>AI Education Console</span></a>
+      <nav class="top-nav" aria-label="Site pages">
+        <a href="./index.html">Home</a><a href="./about.html">About</a><a href="./work.html">Work</a><a href="./research.html">Research</a><a href="./novel.html">Novel</a><a href="./contact.html">Contact</a>
+      </nav>
+      <a class="button secondary header-resume magnetic" href="./assets/resume.docx">Resume</a>
+    </header>
+
+    <main id="main" class="subpage-main">
+      <section class="page-masthead" id="top" aria-labelledby="work-page-title">
+        <p class="hero-kicker">Work / Selected Case Studies</p>
+        <h1 id="work-page-title">核心作品单独展开</h1>
+        <p>Work 页面只放最能代表能力的项目，不承担档案馆职责。每个案例围绕问题、系统、证据和可迁移能力展开。</p>
+      </section>
+
+      <section class="section work-section" id="work" aria-labelledby="work-title">
+        <div class="section-intro reveal">
+          <h2 id="work-title">Selected Work</h2>
+          <p>三个案例按教育问题、AI 系统和交付证据展开，展示我如何把教育场景做成产品。</p>
+        </div>
+        <div class="case-stack">
+          <article class="case-card case-feature sticky-case reveal" data-case-tone="system" data-layer-sequence>
+            <div class="case-copy">
+              <p class="case-role">AI 产品经理 / 独立开发</p>
+              <h3>AI 美本规划工作台</h3>
+              <p>面向国际生及家庭的申请规划平台，整合学生档案、DeepSeek 自动规划、资源库 RAG、院校百科、活动质量检查、导出和后台认证，让申请咨询从经验判断变成可追踪系统。</p>
+              <ul class="evidence-list">
+                <li>DeepSeek 一键生成 10 项 Common App 活动规划并解析进表格</li>
+                <li>RAG 问答连接学生备份、资源库、院校百科和申请档案</li>
+                <li>72 个测试文件覆盖认证、规划、推荐、导出和页面体验</li>
+              </ul>
+              <div class="case-sequence" aria-label="Flagship planning system sequence">
+                <button class="case-step is-current" type="button" data-sequence-layer="profile" aria-pressed="true">
+                  <span>01</span>
+                  <strong>Student Profile</strong>
+                  <small>Goals, activities, scores, and constraints become stable planning context.</small>
+                </button>
+                <button class="case-step" type="button" data-sequence-layer="plan" aria-pressed="false">
+                  <span>02</span>
+                  <strong>DeepSeek Plan</strong>
+                  <small>AI planning generates Common App activity drafts and editable strategy tables.</small>
+                </button>
+                <button class="case-step" type="button" data-sequence-layer="rag" aria-pressed="false">
+                  <span>03</span>
+                  <strong>RAG Knowledge</strong>
+                  <small>Student backups, resources, schools, and cases connect as searchable context.</small>
+                </button>
+                <button class="case-step" type="button" data-sequence-layer="quality" aria-pressed="false">
+                  <span>04</span>
+                  <strong>Quality Check</strong>
+                  <small>Activity quality checks scan evidence, impact language, and major fit.</small>
+                </button>
+                <button class="case-step" type="button" data-sequence-layer="export" aria-pressed="false">
+                  <span>05</span>
+                  <strong>Export System</strong>
+                  <small>Planning output becomes Word, JSON, SVG, and shareable application material.</small>
+                </button>
+                <button class="case-step" type="button" data-sequence-layer="tests" aria-pressed="false">
+                  <span>06</span>
+                  <strong>72 Tests</strong>
+                  <small>Auth, RAG, planning, recommendation, export, and page flows stay verifiable.</small>
+                </button>
+              </div>
+            </div>
+            <div class="system-visual layered-visual" aria-label="AI workspace capability layers" data-active-layer="profile">
+              <button class="layer layer-one is-active" type="button" data-layer="profile">Student Profile</button>
+              <button class="layer layer-two" type="button" data-layer="plan">DeepSeek Plan</button>
+              <button class="layer layer-three" type="button" data-layer="rag">RAG Knowledge</button>
+              <button class="layer layer-four" type="button" data-layer="quality">Quality Check</button>
+              <button class="layer layer-five" type="button" data-layer="export">Export System</button>
+              <button class="layer layer-six" type="button" data-layer="tests">72 Tests</button>
+              <div class="layer-detail" aria-live="polite">
+                <h4 id="layer-detail-title">Student Profile</h4>
+                <p id="layer-detail-copy">Student background data becomes the stable context for planning decisions.</p>
+              </div>
+            </div>
+          </article>
+
+          <article class="case-card reveal" data-case-tone="growth">
+            <div class="case-copy">
+              <p class="case-role">内容增长产品 / AI 文案工作流</p>
+              <h3>小红书文案写作大师</h3>
+              <p>把内容 brief、选题、标题、正文、标签和发布建议做成可运行的 AI 生成工作台，用来验证搜索意图、内容结构和私信转化表达。</p>
+              <ul class="evidence-list">
+                <li>Next.js MVP 覆盖标题、正文、标签、发布建议和历史记录</li>
+                <li>无 API Key 时提供 mock 兜底，便于完整演示</li>
+                <li>与 20,000+ 内容浏览、搜索曝光和私信转化方法衔接</li>
+              </ul>
+            </div>
+            <div class="workflow-visual growth-rail" aria-label="Xiaohongshu content workflow animation">
+              <div class="flow-line" aria-hidden="true"></div>
+              <span data-flow-step="0">Brief</span><span data-flow-step="1">Title</span><span data-flow-step="2">Body</span><span data-flow-step="3">Tags</span><span data-flow-step="4">Publish</span><span data-flow-step="5">DM</span>
+            </div>
+          </article>
+
+          <article class="case-card reveal" data-case-tone="verify">
+            <div class="case-copy">
+              <p class="case-role">企业级 AI 工作流 / 招聘评估</p>
+              <h3>AI Recruiting Assistant</h3>
+              <p>本地优先的招聘工作流应用，覆盖职位标准、简历解析、产品经理简历评分、面试指南、结果计算、审计与公平性支持。</p>
+              <ul class="evidence-list">
+                <li>18 个测试文件覆盖解析、评分、面试、审计和模型连接</li>
+                <li>用户自有模型密钥，无隐藏平台兜底</li>
+                <li>明确保留人工最终决策，避免 AI 分数成为唯一依据</li>
+              </ul>
+            </div>
+            <div class="pool-visual audit-visual" aria-label="Recruiting audit workflow">
+              <div class="pool-stream" aria-hidden="true">
+                <b>resume.parse()</b><b>rubric.score()</b><b>interview.guide()</b><b>fairness.audit()</b>
+                <b>human.review()</b><b>final.result()</b><b>model.connect()</b><b>export.audit()</b>
+              </div>
+              <span data-pool="resume">Resume <small>parse + score</small></span>
+              <span data-pool="interview">Interview <small>guide + weights</small></span>
+              <span data-pool="audit">Audit <small>fairness support</small></span>
+              <span data-pool="review">Human Review <small>final decision</small></span>
+            </div>
+          </article>
+        </div>
+        <div class="section-actions reveal">
+          <a class="button primary magnetic" href="./archive.html">看更多项目档案</a>
+          <a class="button secondary magnetic" href="./contact.html">联系交流</a>
+        </div>
+      </section>
+    </main>
+    <script src="./script.js"></script>
+  </body>
+</html>

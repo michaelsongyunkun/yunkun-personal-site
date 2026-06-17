@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="宋昀锟 Song Yunkun 的研究页面：Google Scholar 论文、奥运项目选择数据建模、国际高中数字学习研究和 AI 教育产品转化。"
+    />
+    <title>Research | 宋昀锟 Song Yunkun</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body class="research-site">
+    <a class="skip-link" href="#main">跳到正文</a>
+    <div class="grain" aria-hidden="true"></div>
+    <div class="scroll-progress" aria-hidden="true"></div>
+    <div class="cursor-glow" aria-hidden="true"></div>
+    <div class="ambient-system" aria-hidden="true">
+      <canvas id="ambientCanvas" width="1600" height="1000"></canvas>
+      <div class="ambient-grid"></div>
+      <div class="ambient-scan"></div>
+      <div class="ambient-circuit"></div>
+      <div class="ambient-ribbons"><span></span><span></span><span></span></div>
+      <div class="ambient-labels">
+        <span>DOI</span><span>AHP</span><span>PCA</span><span>KNN</span><span>TOPSIS</span><span>Survey</span><span>Model</span><span>Product</span>
+      </div>
+      <div class="data-rain">
+        <span>research.paper.verify()</span>
+        <span>decision.model.score()</span>
+        <span>student.survey.read()</span>
+        <span>education.product.translate()</span>
+        <span>doi.record.crosscheck()</span>
+        <span>publication.signal.route()</span>
+      </div>
+    </div>
+
+    <header class="site-header" aria-label="Primary navigation">
+      <a class="brand" href="./index.html" aria-label="Song Yunkun home">
+        <span class="brand-mark" aria-hidden="true">SY</span>
+        <span>AI Education Console</span>
+      </a>
+      <nav class="top-nav" aria-label="Site pages">
+        <a href="./index.html">Home</a>
+        <a href="./about.html">About</a>
+        <a href="./work.html">Work</a>
+        <a href="./research.html">Research</a>
+        <a href="./novel.html">Novel</a>
+        <a href="./contact.html">Contact</a>
+      </nav>
+      <a class="button secondary header-resume magnetic" href="./assets/resume.docx">Resume</a>
+    </header>
+
+    <main id="main" class="subpage-main">
+      <section class="page-masthead research-masthead" id="top" aria-labelledby="research-title">
+        <div class="research-masthead-copy">
+          <p class="hero-kicker">Research / DOI-backed evidence</p>
+          <h1 id="research-title">把研究变成可交互的证据链</h1>
+          <p>
+            这页不是静态论文列表，而是把我的公开论文、建模方法和教育产品能力放进同一套动态阅读路径：
+            先看可信来源，再看模型方法，最后看这些研究如何转化为 AI 教育产品。
+          </p>
+          <div class="hero-actions" aria-label="Research actions">
+            <a class="button primary magnetic" href="https://scholar.google.com/citations?user=uZaqlngAAAAJ&hl=zh-CN" target="_blank" rel="noreferrer">Google Scholar</a>
+            <a class="button secondary magnetic" href="#publications">查看论文</a>
+          </div>
+        </div>
+        <div class="research-orbit" aria-label="Research method motion diagram">
+          <div class="orbit-core">
+            <strong>3</strong>
+            <span>verified papers</span>
+          </div>
+          <span class="orbit-node orbit-node-one">AHP</span>
+          <span class="orbit-node orbit-node-two">PCA</span>
+          <span class="orbit-node orbit-node-three">KNN</span>
+          <span class="orbit-node orbit-node-four">TOPSIS</span>
+          <span class="orbit-node orbit-node-five">Survey</span>
+          <span class="orbit-ring orbit-ring-one"></span>
+          <span class="orbit-ring orbit-ring-two"></span>
+          <span class="orbit-ring orbit-ring-three"></span>
+        </div>
+      </section>
+
+      <section class="proof-band research-proof reveal" aria-label="Research proof metrics">
+        <article data-metric data-tone="research" tabindex="0" role="button" aria-expanded="false" aria-controls="research-metric-one">
+          <strong data-count="3">3</strong>
+          <span>公开论文记录</span>
+          <p id="research-metric-one">Semantic Scholar 与 Crossref 可核验的 DOI / 作者记录。</p>
+        </article>
+        <article data-metric data-tone="verify" tabindex="0" role="button" aria-expanded="false" aria-controls="research-metric-two">
+          <strong data-count="1">1</strong>
+          <span>第一作者论文</span>
+          <p id="research-metric-two">Frontiers in Sports and Active Living 奥运项目选择建模论文。</p>
+        </article>
+        <article data-metric data-tone="system" tabindex="0" role="button" aria-expanded="false" aria-controls="research-metric-three">
+          <strong data-count="536">536</strong>
+          <span>学生调研样本</span>
+          <p id="research-metric-three">国际高中学生互联网资源学习研究中的问卷样本规模。</p>
+        </article>
+        <article data-metric data-tone="growth" tabindex="0" role="button" aria-expanded="false" aria-controls="research-metric-four">
+          <strong data-count="2025">2025</strong>
+          <span>研究输出年份</span>
+          <p id="research-metric-four">三篇公开条目集中在 2025 年，和当前 AI 教育产品主线同步。</p>
+        </article>
+      </section>
+
+      <section class="section research-feature" aria-labelledby="featured-research-title">
+        <div class="section-intro reveal">
+          <h2 id="featured-research-title">Featured paper</h2>
+          <p>第一作者论文放在最前面，因为它最能体现“从复杂规则到可解释模型”的能力。</p>
+        </div>
+        <article class="featured-paper reveal" data-paper-card>
+          <div class="paper-meta">
+            <span>Frontiers in Sports and Active Living</span>
+            <span>2025-07-29</span>
+            <span>First author</span>
+          </div>
+          <h3>Quantifying future Olympic sport selection: a data-driven framework for SDE evaluation and selection</h3>
+          <p>
+            这篇论文把奥运项目选择从主观判断转成多指标决策问题，使用 AHP、PCA 和 KNN
+            对候选运动项目进行量化评估。它适合放在网站里证明：我能把开放问题拆成指标、权重、特征和可解释输出。
+          </p>
+          <div class="paper-actions">
+            <a class="button primary magnetic" href="https://doi.org/10.3389/fspor.2025.1596196" target="_blank" rel="noreferrer">DOI</a>
+            <a class="button secondary magnetic" href="https://www.semanticscholar.org/paper/53e5d51951a2be0a68b0c61e16f1a2a447d7dfb4" target="_blank" rel="noreferrer">Semantic Scholar</a>
+          </div>
+          <div class="research-flow" aria-label="Featured paper method flow" style="--research-flow-progress: 0">
+            <button class="research-flow-step is-active" type="button" data-research-step="0">
+              <span>01</span><strong>Criteria</strong><em>IOC selection signals</em>
+            </button>
+            <button class="research-flow-step" type="button" data-research-step="1">
+              <span>02</span><strong>AHP</strong><em>relative importance</em>
+            </button>
+            <button class="research-flow-step" type="button" data-research-step="2">
+              <span>03</span><strong>PCA</strong><em>feature extraction</em>
+            </button>
+            <button class="research-flow-step" type="button" data-research-step="3">
+              <span>04</span><strong>KNN</strong><em>candidate evaluation</em>
+            </button>
+            <button class="research-flow-step" type="button" data-research-step="4">
+              <span>05</span><strong>Decision</strong><em>ranked SDE output</em>
+            </button>
+          </div>
+        </article>
+      </section>
+
+      <section class="section publications-section" id="publications" aria-labelledby="publications-title">
+        <div class="section-intro reveal">
+          <h2 id="publications-title">Publications</h2>
+          <p>论文卡片按“题目、来源、方法、和个人网站主线的关系”组织，访客不需要读完整摘要也能理解价值。</p>
+        </div>
+        <div class="publication-grid">
+          <article class="publication-card reveal" data-paper-card>
+            <div class="paper-meta">
+              <span>2025</span><span>First author</span><span>DOI verified</span>
+            </div>
+            <h3>Quantifying future Olympic sport selection</h3>
+            <p>用 AHP、PCA、KNN 建立未来奥运项目选择的数据驱动评估框架。</p>
+            <ul class="paper-tags">
+              <li>AHP</li><li>PCA</li><li>KNN</li><li>Decision modeling</li>
+            </ul>
+            <a class="paper-link" href="https://doi.org/10.3389/fspor.2025.1596196" target="_blank" rel="noreferrer">10.3389/fspor.2025.1596196</a>
+          </article>
+          <article class="publication-card reveal" data-paper-card>
+            <div class="paper-meta">
+              <span>2025</span><span>Co-author</span><span>DOI verified</span>
+            </div>
+            <h3>The Olympic Sports Evaluation Model Based on Entropy Weight Method and Improved TOPSIS</h3>
+            <p>用 6 个评价维度和 22 个指标矩阵评估运动项目与奥运核心价值的匹配度。</p>
+            <ul class="paper-tags">
+              <li>Entropy weight</li><li>TOPSIS</li><li>Evaluation matrix</li>
+            </ul>
+            <a class="paper-link" href="https://doi.org/10.71113/jcsis.v2i7.365" target="_blank" rel="noreferrer">10.71113/jcsis.v2i7.365</a>
+          </article>
+          <article class="publication-card reveal" data-paper-card>
+            <div class="paper-meta">
+              <span>2025</span><span>Co-author</span><span>DOI verified</span>
+            </div>
+            <h3>The Specific Application of Internet Resources in the Learning Process of Chinese International High School Students</h3>
+            <p>基于 536 名学生调研，分析国际高中生使用互联网资源学习时的依赖、收益和信息素养缺口。</p>
+            <ul class="paper-tags">
+              <li>536 survey samples</li><li>Digital learning</li><li>Information literacy</li>
+            </ul>
+            <a class="paper-link" href="https://doi.org/10.54254/2753-7064/2025.22692" target="_blank" rel="noreferrer">10.54254/2753-7064/2025.22692</a>
+          </article>
+        </div>
+      </section>
+
+      <section class="section research-translation" aria-labelledby="translation-title">
+        <div class="section-intro narrow reveal">
+          <h2 id="translation-title">From paper to product</h2>
+          <p>动态设计重点放在“研究如何进入产品判断”，让论文不只是背书，而是能解释我的 AI 教育产品方法。</p>
+        </div>
+        <div class="translation-board reveal" aria-label="Research to product translation board">
+          <article>
+            <span>Decision models</span>
+            <h3>多指标评价</h3>
+            <p>AHP、熵权法、TOPSIS、PCA、KNN 可以转化为申请规划里的学校匹配、活动质量评估和优先级排序。</p>
+          </article>
+          <article>
+            <span>Education survey</span>
+            <h3>真实学生场景</h3>
+            <p>国际高中生的互联网学习行为能支撑资源推荐、信息素养训练和 AI 学习助手的产品假设。</p>
+          </article>
+          <article>
+            <span>Publication record</span>
+            <h3>可信输出</h3>
+            <p>DOI、作者顺序和来源记录给招生官、导师和招聘方一个可核验的研究证据入口。</p>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <script src="./script.js"></script>
+  </body>
+</html>

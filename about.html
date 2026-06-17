@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="宋昀锟 Song Yunkun 的关于页面：教育产品定位、双受众证据、AI 教育产品方法和能力矩阵。"
+    />
+    <title>About | 宋昀锟 Song Yunkun</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">跳到正文</a>
+    <div class="grain" aria-hidden="true"></div>
+    <div class="scroll-progress" aria-hidden="true"></div>
+    <div class="cursor-glow" aria-hidden="true"></div>
+    <div class="ambient-system" aria-hidden="true">
+      <canvas id="ambientCanvas" width="1600" height="1000"></canvas>
+      <div class="ambient-grid"></div>
+      <div class="ambient-scan"></div>
+      <div class="ambient-circuit"></div>
+      <div class="ambient-ribbons"><span></span><span></span><span></span></div>
+      <div class="ambient-labels"><span>Student</span><span>Fit</span><span>RAG</span><span>Agent</span><span>Plan</span><span>Test</span><span>Export</span><span>Loop</span></div>
+      <div class="data-rain"><span>student.signal.map()</span><span>school.fit.score()</span><span>rag.education.merge()</span><span>agent.plan.route()</span><span>tests.cover.advising()</span><span>export.application.pack()</span></div>
+    </div>
+
+    <header class="site-header" aria-label="Primary navigation">
+      <a class="brand" href="./index.html" aria-label="Song Yunkun home">
+        <span class="brand-mark" aria-hidden="true">SY</span>
+        <span>AI Education Console</span>
+      </a>
+      <nav class="top-nav" aria-label="Site pages">
+        <a href="./index.html">Home</a>
+        <a href="./about.html">About</a>
+        <a href="./work.html">Work</a>
+        <a href="./research.html">Research</a>
+        <a href="./novel.html">Novel</a>
+        <a href="./contact.html">Contact</a>
+      </nav>
+      <a class="button secondary header-resume magnetic" href="./assets/resume.docx">Resume</a>
+    </header>
+
+    <main id="main" class="subpage-main">
+      <section class="page-masthead" id="top" aria-labelledby="about-title">
+        <p class="hero-kicker">About / Education Product Builder</p>
+        <h1 id="about-title">我把教育判断做成可验证系统</h1>
+        <p>
+          我的主线不是单纯展示经历，而是把数学教育、AI 工作流、产品规划和工程交付串成一条证据链：
+          看见真实学生场景，定义判断边界，做出可运行原型，再用测试和反馈验证。
+        </p>
+      </section>
+
+      <section class="section audience-section" id="audience" aria-labelledby="audience-title">
+        <div class="section-intro reveal">
+          <h2 id="audience-title">Two review modes</h2>
+          <p>同一套经历需要服务两类阅读者：招生官看长期投入和可信度，招聘方看产品和工程交付能力。</p>
+        </div>
+        <div class="audience-grid">
+          <article class="audience-card reveal" data-tilt-card>
+            <div class="audience-card-head"><span>Admissions Mode</span><strong>01</strong></div>
+            <h3>用 AI 赋能教育选择</h3>
+            <p>对招生官，我呈现的是数学教育背景、研究可信度、教育产品实践和对学生决策场景的长期投入。</p>
+            <ul class="evidence-list">
+              <li>Boston University 数学与数学教育方向</li>
+              <li>SCI JCR Q2 数模论文一作与软件著作权</li>
+              <li>把申请规划、学习反馈和资源推荐做成 AI 产品</li>
+            </ul>
+          </article>
+          <article class="audience-card reveal" data-tilt-card>
+            <div class="audience-card-head"><span>Recruiting Mode</span><strong>02</strong></div>
+            <h3>能把 AI 想法交付成系统</h3>
+            <p>对招聘方，我强调 AI 产品经理能力、技术项目管理能力、全栈原型能力和把反馈转成路线图的执行力。</p>
+            <ul class="evidence-list">
+              <li>RAG、Agent、Prompt、API 与文档导出工作流</li>
+              <li>前后端、认证、SQLite 持久化和回归测试</li>
+              <li>从 341 条反馈到澄清清单、优先级和版本节奏</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section class="section system-section" id="system" aria-labelledby="system-title">
+        <div class="section-intro narrow reveal">
+          <h2 id="system-title">AI Education Operating System</h2>
+          <p>我把 AI 教育产品拆成六个可复用阶段，每个阶段都必须有输入、判断和可验证产出。</p>
+        </div>
+        <div class="system-path" style="--path-progress: 0">
+          <article class="path-step reveal" data-path-step="0"><span>Student Signal</span><p>收集学生目标、家庭约束、学习反馈、访谈材料和真实场景输入。</p></article>
+          <article class="path-step reveal" data-path-step="1"><span>Context Graph</span><p>把学生档案、院校信息、活动素材和资源库整理成可检索上下文。</p></article>
+          <article class="path-step reveal" data-path-step="2"><span>Strategy Fit</span><p>形成选校匹配、活动建议、优先级依据、澄清清单和版本排期材料。</p></article>
+          <article class="path-step reveal" data-path-step="3"><span>AI Workflow</span><p>设计提示词、RAG、Agent Skills 和 API 调用流程，让策略生成有上下文。</p></article>
+          <article class="path-step reveal" data-path-step="4"><span>Prototype Delivery</span><p>落地前后端、认证、导出、数据持久化和回归测试。</p></article>
+          <article class="path-step reveal" data-path-step="5"><span>Evidence Loop</span><p>把交付结果重新接回学生反馈、申请结果和下一轮产品节奏。</p></article>
+        </div>
+      </section>
+
+      <section class="section stack-section" id="stack" aria-labelledby="stack-title">
+        <div class="section-intro reveal">
+          <h2 id="stack-title">Capability Matrix</h2>
+          <p>能力展示不只列工具名，而是说明这些工具如何服务教育产品、申请规划和可验证交付。</p>
+        </div>
+        <div class="stack-tabs" role="tablist" aria-label="Capability groups">
+          <button class="tab" id="tab-ai" type="button" data-tab="ai" role="tab" aria-selected="false" aria-controls="panel-ai">AI 教育</button>
+          <button class="tab" id="tab-web" type="button" data-tab="web" role="tab" aria-selected="false" aria-controls="panel-web">产品交付</button>
+          <button class="tab" id="tab-ops" type="button" data-tab="ops" role="tab" aria-selected="false" aria-controls="panel-ops">增长证据</button>
+          <button class="tab" id="tab-docs" type="button" data-tab="docs" role="tab" aria-selected="false" aria-controls="panel-docs">研究输出</button>
+          <button class="tab" id="tab-design" type="button" data-tab="design" role="tab" aria-selected="false" aria-controls="panel-design">设计系统</button>
+        </div>
+        <div class="stack-panels">
+          <div class="stack-empty" data-stack-empty role="status">
+            <span>SELECT A CAPABILITY</span>
+            <p>点击上方任一能力按钮后，这里只显示对应能力层的内容和动态示意。</p>
+          </div>
+          <article class="stack-panel" id="panel-ai" data-panel="ai" role="tabpanel" aria-labelledby="tab-ai" hidden>
+            <h3>AI Education Layer</h3>
+            <p>Prompt Engineering、RAG、Agent Skills、学生画像、申请策略、OpenAI Responses API、DeepSeek-compatible API。</p>
+            <div class="stack-visual ai-visual" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
+          </article>
+          <article class="stack-panel" id="panel-web" data-panel="web" role="tabpanel" aria-labelledby="tab-web" hidden>
+            <h3>Product Delivery Layer</h3>
+            <p>HTML、CSS、JavaScript、TypeScript、React、Next.js、Node.js、REST API、SQLite、better-sqlite3、认证与测试。</p>
+            <div class="stack-visual web-visual" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
+          </article>
+          <article class="stack-panel" id="panel-ops" data-panel="ops" role="tabpanel" aria-labelledby="tab-ops" hidden>
+            <h3>Growth Evidence Layer</h3>
+            <p>用户反馈整理、需求分类、优先级评估、关键词挖掘、搜索意图分析、小红书内容策划、私信转化和 2 万+ 浏览验证。</p>
+            <div class="stack-visual ops-visual" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
+          </article>
+          <article class="stack-panel" id="panel-docs" data-panel="docs" role="tabpanel" aria-labelledby="tab-docs" hidden>
+            <h3>Research Output Layer</h3>
+            <p>Markdown、YAML、JSON、CSV / XLSX、python-docx、Word 可打开的 .doc HTML 文档导出、数模论文与 Scholar 档案。</p>
+            <div class="stack-visual docs-visual" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
+          </article>
+          <article class="stack-panel" id="panel-design" data-panel="design" role="tabpanel" aria-labelledby="tab-design" hidden>
+            <h3>Cobalt Intelligence Design System</h3>
+            <p>冷白、石墨黑和信号钴蓝构成成熟科技底色；绿色只表达验证通过，琥珀只表达增长证据，红色只表达风险。</p>
+            <div class="stack-visual palette-visual" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></div>
+          </article>
+        </div>
+      </section>
+    </main>
+    <script src="./script.js"></script>
+  </body>
+</html>
