@@ -106,15 +106,15 @@
     <main id="main">
       <section class="hero" id="top" aria-labelledby="hero-title">
         <div class="hero-copy">
-          <p class="hero-kicker">AI Education Command Center / 申请规划系统 / 全栈原型</p>
+          <p class="hero-kicker">AI Education Product Builder / 申请规划系统 / GitHub 证据链</p>
           <h1 id="hero-title">宋昀锟</h1>
           <p class="hero-name">Song Yunkun</p>
           <p class="hero-subtitle">
-            我把学生信号、AI 工作流和工程交付组织成可运行、可测试、可验证的教育产品系统。
+            我构建 AI 教育产品，把学生背景、规划逻辑和工程验证变成可运行系统。
           </p>
           <div class="hero-actions" aria-label="Primary actions">
             <a class="button primary magnetic" href="./work.html">查看核心作品</a>
-            <a class="button secondary magnetic" href="./about.html">了解方法与经历</a>
+            <a class="button secondary magnetic" href="./assets/resume.docx">下载简历</a>
           </div>
         </div>
         <div class="hero-art" aria-label="生成式 AI 产品系统图谱">
@@ -122,7 +122,7 @@
           <div class="scan-field" aria-hidden="true"></div>
           <div class="orbit-rings" aria-hidden="true"><span></span><span></span><span></span></div>
           <div class="signal-chips" aria-hidden="true">
-            <span>DeepSeek</span><span>RAG</span><span>SQLite</span><span>72 Tests</span>
+            <span>Screenshot</span><span>GitHub</span><span>RAG</span><span>72 Tests</span>
           </div>
           <div class="network-inspector" aria-live="polite">
             <span id="network-mode-label">Student Signal</span>
@@ -139,34 +139,108 @@
       </section>
 
       <section class="proof-band reveal" aria-label="Product proof metrics">
-        <article data-metric data-tone="verify" tabindex="0" role="button" aria-expanded="false" aria-controls="metric-detail-one">
+        <article data-metric data-evidence-panel="github" data-tone="system" tabindex="0" role="button" aria-expanded="false" aria-controls="metric-detail-zero">
+          <strong data-count="2">2</strong>
+          <span>GitHub 仓库</span>
+          <p id="metric-detail-zero">个人网站和 US College Compass 都有可访问的仓库证据入口。</p>
+        </article>
+        <article data-metric data-evidence-panel="tests" data-tone="verify" tabindex="0" role="button" aria-expanded="false" aria-controls="metric-detail-one">
           <strong data-count="72">72</strong>
-          <span>美本平台测试文件</span>
+          <span>测试文件</span>
           <p id="metric-detail-one">覆盖认证、RAG、规划、推荐、导出和页面布局的工程证据。</p>
         </article>
-        <article data-metric data-tone="system" tabindex="0" role="button" aria-expanded="false" aria-controls="metric-detail-two">
-          <strong data-count="341">341</strong>
-          <span>需求与反馈分类</span>
-          <p id="metric-detail-two">把课堂、会议、申请、知识管理反馈拆成可执行需求池。</p>
+        <article data-metric data-evidence-panel="research" data-tone="system" tabindex="0" role="button" aria-expanded="false" aria-controls="metric-detail-two">
+          <strong data-count="3" data-suffix="/3">3/3</strong>
+          <span>RAG 评估通过</span>
+          <p id="metric-detail-two">本地 golden set 评估通过，用来证明问答链路不是只靠演示文案。</p>
         </article>
         <article data-metric data-tone="system" tabindex="0" role="button" aria-expanded="false" aria-controls="metric-detail-three">
-          <strong data-count="103">103</strong>
-          <span>澄清项</span>
-          <p id="metric-detail-three">用于追问用户、定义边界和判断真实教育场景。</p>
+          <strong data-count="341">341</strong>
+          <span>需求分类</span>
+          <p id="metric-detail-three">把课堂、会议、申请、知识管理反馈拆成可执行需求池。</p>
         </article>
         <article data-metric data-tone="growth" tabindex="0" role="button" aria-expanded="false" aria-controls="metric-detail-four">
           <strong data-count="20000" data-suffix="+">20,000+</strong>
           <span>内容浏览</span>
           <p id="metric-detail-four">来自搜索曝光、内容结构和转化话术优化。</p>
         </article>
+        <article data-metric data-tone="verify" tabindex="0" role="button" aria-expanded="false" aria-controls="metric-detail-five">
+          <strong data-count="38" data-suffix="ms">38ms</strong>
+          <span>性能 p95</span>
+          <p id="metric-detail-five">本地性能 smoke p95 低于阈值，支撑投递级产品证据。</p>
+        </article>
+      </section>
+
+      <section class="section evidence-console-section" id="evidence" aria-labelledby="evidence-title">
+        <div class="section-intro narrow reveal">
+          <h2 id="evidence-title">Evidence chain</h2>
+          <p>截图、仓库、测试和研究一起证明我不只是讲产品想法，而是把 AI 教育系统做成可运行交付物。</p>
+        </div>
+        <div class="evidence-console">
+          <article class="evidence-shot-card reveal is-current" data-evidence-stage="screenshot" data-evidence-panel="screenshot">
+            <div class="evidence-shot-media">
+              <img
+                src="./assets/evidence/us-college-compass-planning-workspace.png"
+                alt="US College Compass 申请规划中心界面，包含工作流导航、DeepSeek 优化和申请规划步骤。"
+                width="1915"
+                height="987"
+                loading="lazy"
+              />
+              <span class="evidence-scan" aria-hidden="true"></span>
+            </div>
+            <div class="evidence-shot-copy">
+              <span>Real product screenshot</span>
+              <h3>US College Compass</h3>
+              <p>真实工作台截图展示学生档案、规划流程、DeepSeek 优化和可复盘版本入口。</p>
+            </div>
+          </article>
+          <div class="repo-grid" aria-label="GitHub repositories">
+            <a class="repo-card reveal" href="https://github.com/michaelsongyunkun/us-college-application-consultant" target="_blank" rel="noreferrer" data-evidence-panel="github">
+              <span>GitHub / Flagship</span>
+              <h3>us-college-application-consultant</h3>
+              <p>DeepSeek、RAG、认证、导出、资源库、选校和测试验证共同构成 AI 申请规划系统。</p>
+              <b>verify + audit + perf smoke</b>
+            </a>
+            <a class="repo-card reveal" href="https://github.com/michaelsongyunkun/yunkun-personal-site" target="_blank" rel="noreferrer" data-evidence-panel="resume">
+              <span>GitHub / Portfolio</span>
+              <h3>yunkun-personal-site</h3>
+              <p>静态双语个人网站，包含 AI opening、ambient canvas、Work 案例、研究页和 reduced-motion 支持。</p>
+              <b>static site + motion system</b>
+            </a>
+          </div>
+          <div class="evidence-journey reveal" aria-label="Dynamic evidence journey">
+            <button class="evidence-step is-current" type="button" data-evidence-step="screenshot" aria-pressed="true">
+              <span>Screenshot</span>
+              <strong>真实产品界面</strong>
+            </button>
+            <button class="evidence-step" type="button" data-evidence-step="github" aria-pressed="false">
+              <span>GitHub</span>
+              <strong>仓库可检查</strong>
+            </button>
+            <button class="evidence-step" type="button" data-evidence-step="tests" aria-pressed="false">
+              <span>Tests</span>
+              <strong>验证链路</strong>
+            </button>
+            <button class="evidence-step" type="button" data-evidence-step="research" aria-pressed="false">
+              <span>Research</span>
+              <strong>研究背书</strong>
+            </button>
+            <button class="evidence-step" type="button" data-evidence-step="resume" aria-pressed="false">
+              <span>Resume</span>
+              <strong>投递入口</strong>
+            </button>
+            <div class="evidence-journey-detail" aria-live="polite">
+              <span id="evidence-step-label">Screenshot</span>
+              <p id="evidence-step-copy">从真实规划工作台开始，让读者先看到产品已经跑起来。</p>
+            </div>
+          </div>
+        </div>
       </section>
 
       <section class="section route-section" aria-labelledby="site-map-title">
         <div class="section-intro reveal">
           <h2 id="site-map-title">Start from the right page</h2>
-          <p>
-            首页只承担分流和定位。完整经历、核心案例、项目档案和联系方式分别进入独立页面，避免一个页面塞下所有信息。
-          </p>
+          <p>首页负责让读者快速判断身份和证据。完整经历、案例、研究、档案和联系方式进入独立页面。</p>
         </div>
         <div class="route-grid">
           <a class="route-card reveal" href="./about.html">

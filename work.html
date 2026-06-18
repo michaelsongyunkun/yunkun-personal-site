@@ -29,27 +29,33 @@
 
     <main id="main" class="subpage-main">
       <section class="page-masthead" id="top" aria-labelledby="work-page-title">
-        <p class="hero-kicker">Work / Selected Case Studies</p>
-        <h1 id="work-page-title">核心作品单独展开</h1>
-        <p>Work 页面只放最能代表能力的项目，不承担档案馆职责。每个案例围绕问题、系统、证据和可迁移能力展开。</p>
+        <p class="hero-kicker">Work / Evidence-Led Case Studies</p>
+        <h1 id="work-page-title">核心作品与证据链</h1>
+        <p>这里优先展示真实截图、GitHub 仓库、测试验证和产品判断，让读者快速确认我能把 AI 教育想法做成系统。</p>
       </section>
 
       <section class="section work-section" id="work" aria-labelledby="work-title">
         <div class="section-intro reveal">
-          <h2 id="work-title">Selected Work</h2>
-          <p>三个案例按教育问题、AI 系统和交付证据展开，展示我如何把教育场景做成产品。</p>
+          <h2 id="work-title">Flagship proof</h2>
+          <p>主案例先给可视证据，再解释问题、系统、仓库和验证结果。</p>
         </div>
         <div class="case-stack">
           <article class="case-card case-feature sticky-case reveal" data-case-tone="system" data-layer-sequence>
             <div class="case-copy">
               <p class="case-role">AI 产品经理 / 独立开发</p>
               <h3>AI 美本规划工作台</h3>
-              <p>面向国际生及家庭的申请规划平台，整合学生档案、DeepSeek 自动规划、资源库 RAG、院校百科、活动质量检查、导出和后台认证，让申请咨询从经验判断变成可追踪系统。</p>
+              <p>面向国际生及家庭的申请规划平台，整合学生档案、DeepSeek 自动规划、资源库 RAG、院校百科、活动质量检查、导出和后台认证。</p>
               <ul class="evidence-list">
                 <li>DeepSeek 一键生成 10 项 Common App 活动规划并解析进表格</li>
                 <li>RAG 问答连接学生备份、资源库、院校百科和申请档案</li>
-                <li>72 个测试文件覆盖认证、规划、推荐、导出和页面体验</li>
+                <li>72 个测试文件、RAG golden set、安全扫描和性能 smoke 形成工程证据</li>
               </ul>
+              <div class="case-proof-strip" aria-label="US College Compass proof">
+                <span>GitHub repo</span>
+                <span>真实截图</span>
+                <span>CI gate</span>
+                <span>p95 38ms</span>
+              </div>
               <div class="case-sequence" aria-label="Flagship planning system sequence">
                 <button class="case-step is-current" type="button" data-sequence-layer="profile" aria-pressed="true">
                   <span>01</span>
@@ -83,7 +89,35 @@
                 </button>
               </div>
             </div>
-            <div class="system-visual layered-visual" aria-label="AI workspace capability layers" data-active-layer="profile">
+            <div class="system-visual layered-visual screenshot-visual" aria-label="US College Compass screenshot and capability layers" data-active-layer="profile">
+              <div class="screenshot-shell">
+                <img
+                  src="./assets/evidence/us-college-compass-planning-workspace.png"
+                  alt="US College Compass 申请规划中心截图，展示工作流导航、学生档案补齐、DeepSeek 优化和规划步骤。"
+                  width="1915"
+                  height="987"
+                  loading="lazy"
+                />
+                <span class="screenshot-scan" aria-hidden="true"></span>
+                <button class="proof-hotspot is-current" type="button" data-proof-hotspot="profile" aria-pressed="true">
+                  <span>Profile</span>
+                </button>
+                <button class="proof-hotspot" type="button" data-proof-hotspot="plan" aria-pressed="false">
+                  <span>Plan</span>
+                </button>
+                <button class="proof-hotspot" type="button" data-proof-hotspot="rag" aria-pressed="false">
+                  <span>RAG</span>
+                </button>
+                <button class="proof-hotspot" type="button" data-proof-hotspot="quality" aria-pressed="false">
+                  <span>Quality</span>
+                </button>
+                <button class="proof-hotspot" type="button" data-proof-hotspot="export" aria-pressed="false">
+                  <span>Export</span>
+                </button>
+                <button class="proof-hotspot" type="button" data-proof-hotspot="tests" aria-pressed="false">
+                  <span>Tests</span>
+                </button>
+              </div>
               <button class="layer layer-one is-active" type="button" data-layer="profile">Student Profile</button>
               <button class="layer layer-two" type="button" data-layer="plan">DeepSeek Plan</button>
               <button class="layer layer-three" type="button" data-layer="rag">RAG Knowledge</button>
@@ -94,6 +128,7 @@
                 <h4 id="layer-detail-title">Student Profile</h4>
                 <p id="layer-detail-copy">Student background data becomes the stable context for planning decisions.</p>
               </div>
+              <a class="visual-repo-link magnetic" href="https://github.com/michaelsongyunkun/us-college-application-consultant" target="_blank" rel="noreferrer">Open GitHub</a>
             </div>
           </article>
 
@@ -137,9 +172,41 @@
             </div>
           </article>
         </div>
+        <section class="repo-evidence-section reveal" aria-labelledby="repo-evidence-title">
+          <div class="section-intro narrow">
+            <h2 id="repo-evidence-title">Repository evidence</h2>
+            <p>GitHub 卡片不只是外链，而是把项目简介、技术范围和验证证据放在同一个扫描面上。</p>
+          </div>
+          <div class="repo-grid repo-grid-wide">
+            <a class="repo-card" href="https://github.com/michaelsongyunkun/us-college-application-consultant" target="_blank" rel="noreferrer">
+              <span>Flagship AI education repo</span>
+              <h3>US College Compass</h3>
+              <p>DeepSeek 规划、RAG 问答、学生档案、资源库、选校、导出、认证、备份和运维检查构成完整产品证据。</p>
+              <div class="repo-proof-flow" aria-label="Repository verification flow">
+                <span data-proof-state="system">verify</span>
+                <span data-proof-state="verified">RAG eval</span>
+                <span data-proof-state="verified">security scan</span>
+                <span data-proof-state="verified">perf smoke</span>
+              </div>
+              <b>npm run verify, audit, RAG eval, security scan</b>
+            </a>
+            <a class="repo-card" href="https://github.com/michaelsongyunkun/yunkun-personal-site" target="_blank" rel="noreferrer">
+              <span>Portfolio source repo</span>
+              <h3>AI Education Console</h3>
+              <p>双语静态站、AI opening、ambient canvas、Work sticky case、研究页、档案墙和 reduced-motion 共同组成个人品牌系统。</p>
+              <div class="repo-proof-flow" aria-label="Portfolio repository proof flow">
+                <span data-proof-state="system">static</span>
+                <span data-proof-state="system">canvas</span>
+                <span data-proof-state="verified">reduced motion</span>
+                <span data-proof-state="verified">smoke ready</span>
+              </div>
+              <b>static HTML, CSS, vanilla JS, canvas motion</b>
+            </a>
+          </div>
+        </section>
         <div class="section-actions reveal">
           <a class="button primary magnetic" href="./archive.html">看更多项目档案</a>
-          <a class="button secondary magnetic" href="./contact.html">联系交流</a>
+          <a class="button secondary magnetic" href="./assets/resume.docx">下载简历</a>
         </div>
       </section>
     </main>

@@ -659,10 +659,21 @@ const writeLanguagePreference = (lang) => {
 let currentLang = readLanguagePreference();
 let currentNetworkMode = "signal";
 let currentLayer = "profile";
+let currentEvidenceStep = "screenshot";
 let userSelectedNetworkMode = false;
+let userSelectedEvidenceStep = false;
+let evidenceJourneyTimer = 0;
 
 const networkModeOrder = ["signal", "rag", "agent", "tests", "export"];
 const layerOrder = ["profile", "plan", "rag", "quality", "export", "tests"];
+const evidenceStepOrder = ["screenshot", "github", "tests", "research", "resume"];
+const evidencePanelByStep = {
+  screenshot: "screenshot",
+  github: "github",
+  tests: "tests",
+  research: "research",
+  resume: "resume",
+};
 const finePointer = window.matchMedia("(pointer: fine)").matches;
 let ambientPointer = { x: 0.5, y: 0.5, active: false };
 const networkModeCopy = {
@@ -726,24 +737,72 @@ const layerDetails = {
   },
 };
 
+const evidenceStepDetails = {
+  screenshot: {
+    label: "Screenshot",
+    zh: "从真实规划工作台开始，让读者先看到产品已经跑起来。",
+    en: "Start with the real planning workspace so readers see that the product is already running.",
+  },
+  github: {
+    label: "GitHub",
+    zh: "把核心项目和个人网站源码放到可访问仓库，方便招生官和招聘方进一步检查。",
+    en: "Route readers to accessible source repositories for deeper admissions and recruiting review.",
+  },
+  tests: {
+    label: "Tests",
+    zh: "用 verify、RAG eval、安全扫描和性能 smoke 表达工程交付不是静态展示。",
+    en: "Use verify, RAG eval, security scans, and performance smoke checks to show working delivery.",
+  },
+  research: {
+    label: "Research",
+    zh: "把论文、RAG 评估和需求整理放进同一条证据链，支撑 AI 教育产品判断。",
+    en: "Connect papers, RAG evaluation, and requirement analysis into one AI education proof chain.",
+  },
+  resume: {
+    label: "Resume",
+    zh: "最终导向清晰行动：看作品、打开仓库、下载简历并继续沟通。",
+    en: "End with clear actions: view work, inspect repositories, download the resume, and continue the conversation.",
+  },
+};
+
 const originalTextByElement = new WeakMap();
 const pageLanguageText = {
   "index.html": [
     ["#hero-title", "Song Yunkun"],
-    [".hero-kicker", "AI Education Command Center / Application Planning System / Full-stack Prototype"],
-    [".hero-subtitle", "I build education products that turn student signals, AI workflows, and engineering delivery into systems people can run, test, and verify."],
+    [".hero-kicker", "AI Education Product Builder / Application Planning System / GitHub Evidence"],
+    [".hero-subtitle", "I build AI education products that turn student context, planning logic, and engineering proof into working systems."],
     [".hero-actions .button:nth-child(1)", "View Core Work"],
-    [".hero-actions .button:nth-child(2)", "About the Method"],
-    [".proof-band article:nth-child(1) span", "US application platform test files"],
+    [".hero-actions .button:nth-child(2)", "Download Resume"],
+    [".proof-band article:nth-child(1) span", "GitHub repositories"],
+    ["#metric-detail-zero", "The personal site and US College Compass both have accessible repository evidence."],
+    [".proof-band article:nth-child(2) span", "test files"],
     ["#metric-detail-one", "Engineering evidence across auth, RAG, planning, recommendations, export, and layout."],
-    [".proof-band article:nth-child(2) span", "requirements and feedback classified"],
-    ["#metric-detail-two", "Classroom, meeting, application, and knowledge feedback turned into an actionable requirement pool."],
-    [".proof-band article:nth-child(3) span", "clarification items"],
-    ["#metric-detail-three", "Used to question users, define boundaries, and judge real education scenarios."],
-    [".proof-band article:nth-child(4) span", "content views"],
+    [".proof-band article:nth-child(3) span", "RAG eval passed"],
+    ["#metric-detail-two", "The local golden-set evaluation proves the Q&A chain is more than demo copy."],
+    [".proof-band article:nth-child(4) span", "requirements classified"],
+    ["#metric-detail-three", "Classroom, meeting, application, and knowledge feedback turned into an actionable requirement pool."],
+    [".proof-band article:nth-child(5) span", "content views"],
     ["#metric-detail-four", "Evidence from search exposure, content structure, and conversion-language optimization."],
+    [".proof-band article:nth-child(6) span", "performance p95"],
+    ["#metric-detail-five", "Local performance smoke stayed under the threshold for portfolio-grade product proof."],
+    ["#evidence-title", "Evidence chain"],
+    [".evidence-console-section .section-intro p", "Screenshots, repositories, tests, and research prove that the AI education work is shipped, inspectable, and verifiable."],
+    [".evidence-shot-copy span", "Real product screenshot"],
+    [".evidence-shot-copy h3", "US College Compass"],
+    [".evidence-shot-copy p", "The live workspace shows student profiles, planning flow, DeepSeek optimization, and versioned application planning."],
+    [".repo-grid .repo-card:nth-child(1) > span", "GitHub / Flagship"],
+    [".repo-grid .repo-card:nth-child(1) p", "DeepSeek, RAG, auth, exports, resource libraries, school selection, and tests form an AI admissions planning system."],
+    [".repo-grid .repo-card:nth-child(1) b", "verify + audit + perf smoke"],
+    [".repo-grid .repo-card:nth-child(2) > span", "GitHub / Portfolio"],
+    [".repo-grid .repo-card:nth-child(2) p", "A static bilingual AI education portfolio with an AI opening, ambient canvas, case studies, research pages, and reduced-motion support."],
+    [".repo-grid .repo-card:nth-child(2) b", "static site + motion system"],
+    [".evidence-step[data-evidence-step='screenshot'] strong", "Real product UI"],
+    [".evidence-step[data-evidence-step='github'] strong", "Inspectable repos"],
+    [".evidence-step[data-evidence-step='tests'] strong", "Verification chain"],
+    [".evidence-step[data-evidence-step='research'] strong", "Research backing"],
+    [".evidence-step[data-evidence-step='resume'] strong", "Resume route"],
     ["#site-map-title", "Start from the right page"],
-    [".route-section .section-intro p", "The homepage is a routing layer, not a dumping ground. Background, core work, research, fiction, archives, and contact each have their own page."],
+    [".route-section .section-intro p", "The homepage helps readers judge identity and proof fast. Background, work, research, archive, and contact each have their own page."],
     [".route-section .route-card:nth-child(1) h3", "Background and method"],
     [".route-section .route-card:nth-child(1) p", "For admissions officers, mentors, and recruiters: background, decision style, capability matrix, and education-product method."],
     [".route-section .route-card:nth-child(2) h3", "Core work"],
@@ -794,16 +853,22 @@ const pageLanguageText = {
     [".stack-empty p", "Choose any capability above to see the relevant layer and motion example."],
   ],
   "work.html": [
-    ["#work-page-title", "Core projects, expanded as case studies"],
-    [".page-masthead > p:not(.hero-kicker)", "The Work page focuses on the projects that best demonstrate delivery. Each case is organized around the problem, the system, the evidence, and the capability that transfers to new work."],
-    ["#work-title", "Selected Work"],
-    [".work-section .section-intro p", "Three case studies show how I move from an education or workflow problem to an AI system with concrete delivery evidence."],
+    [".page-masthead .hero-kicker", "Work / Evidence-Led Case Studies"],
+    ["#work-page-title", "Core projects and evidence chain"],
+    [".page-masthead > p:not(.hero-kicker)", "This page leads with real screenshots, GitHub repositories, tests, and product judgment so readers can verify that the AI education work is shipped."],
+    ["#work-title", "Flagship proof"],
+    [".work-section .section-intro p", "The main case starts with visible proof, then explains the problem, system, repository, and verification results."],
     [".case-card:nth-child(1) .case-role", "AI Product Manager / Independent Developer"],
     [".case-card:nth-child(1) h3", "AI US Application Planning Workspace"],
-    [".case-card:nth-child(1) .case-copy > p:nth-of-type(2)", "A planning platform for international students and families, combining student profiles, DeepSeek-generated plans, resource-library RAG, school data, activity-quality checks, export, and backend authentication."],
+    [".case-card:nth-child(1) .case-copy > p:nth-of-type(2)", "A planning platform for international students and families, combining student profiles, DeepSeek plans, resource-library RAG, school data, activity checks, export, and backend auth."],
     [".case-card:nth-child(1) li:nth-child(1)", "DeepSeek generates 10 Common App activity plans and parses them into tables."],
     [".case-card:nth-child(1) li:nth-child(2)", "RAG connects student backups, resources, school encyclopedia, and application portfolios."],
-    [".case-card:nth-child(1) li:nth-child(3)", "72 test files cover auth, planning, recommendations, export, and page experience."],
+    [".case-card:nth-child(1) li:nth-child(3)", "72 test files, a RAG golden set, security scan, and performance smoke form engineering proof."],
+    [".case-proof-strip span:nth-child(1)", "GitHub repo"],
+    [".case-proof-strip span:nth-child(2)", "Real screenshot"],
+    [".case-proof-strip span:nth-child(3)", "CI gate"],
+    [".case-proof-strip span:nth-child(4)", "p95 38ms"],
+    [".visual-repo-link", "Open GitHub"],
     [".case-card:nth-child(2) .case-role", "Content Growth Product / AI Copy Workflow"],
     [".case-card:nth-child(2) h3", "Xiaohongshu Copywriting Assistant"],
     [".case-card:nth-child(2) .case-copy > p:nth-of-type(2)", "A working AI content workspace for briefs, topics, titles, body copy, tags, and publishing advice, built to test search intent, content structure, and conversion language."],
@@ -815,8 +880,18 @@ const pageLanguageText = {
     [".case-card:nth-child(3) li:nth-child(1)", "18 test files cover parsing, scoring, interviews, audit, and model connections."],
     [".case-card:nth-child(3) li:nth-child(2)", "Users bring their own model keys; the platform does not hide fallback behavior."],
     [".case-card:nth-child(3) li:nth-child(3)", "Human final decisions are explicitly preserved so AI scores are never the only basis."],
+    ["#repo-evidence-title", "Repository evidence"],
+    [".repo-evidence-section .section-intro p", "GitHub cards combine project summary, technical scope, and verification proof in one scannable surface."],
+    [".repo-grid-wide .repo-card:nth-child(1) > span", "Flagship AI education repo"],
+    [".repo-grid-wide .repo-card:nth-child(1) h3", "US College Compass"],
+    [".repo-grid-wide .repo-card:nth-child(1) p", "DeepSeek planning, RAG Q&A, student files, resources, school selection, exports, auth, backup, and operations checks form complete product proof."],
+    [".repo-grid-wide .repo-card:nth-child(1) b", "npm run verify, audit, RAG eval, security scan"],
+    [".repo-grid-wide .repo-card:nth-child(2) > span", "Portfolio source repo"],
+    [".repo-grid-wide .repo-card:nth-child(2) h3", "AI Education Console"],
+    [".repo-grid-wide .repo-card:nth-child(2) p", "A bilingual static site with AI opening, ambient canvas, Work sticky case, research page, archive wall, and reduced-motion support."],
+    [".repo-grid-wide .repo-card:nth-child(2) b", "static HTML, CSS, vanilla JS, canvas motion"],
     [".work-section .section-actions .button:nth-child(1)", "View more archives"],
-    [".work-section .section-actions .button:nth-child(2)", "Contact"],
+    [".work-section .section-actions .button:nth-child(2)", "Download Resume"],
   ],
   "research.html": [
     ["#research-title", "Research as an interactive evidence chain"],
@@ -1192,6 +1267,50 @@ const updateLayerDetail = () => {
   body.textContent = detail[currentLang];
 };
 
+const updateEvidenceStepDetail = () => {
+  const detail = evidenceStepDetails[currentEvidenceStep];
+  const label = document.getElementById("evidence-step-label");
+  const body = document.getElementById("evidence-step-copy");
+  if (!detail || !label || !body) return;
+  label.textContent = detail.label;
+  body.textContent = detail[currentLang];
+};
+
+const activateEvidenceStep = (step, userIntent = false) => {
+  if (!evidenceStepOrder.includes(step) || !evidenceStepDetails[step]) return;
+  currentEvidenceStep = step;
+  if (userIntent) userSelectedEvidenceStep = true;
+
+  document.body.dataset.evidenceStep = step;
+
+  document.querySelectorAll("[data-evidence-step]").forEach((item) => {
+    const active = item.dataset.evidenceStep === step;
+    item.classList.toggle("is-current", active);
+    item.setAttribute("aria-pressed", String(active));
+  });
+
+  const panel = evidencePanelByStep[step];
+  document.querySelectorAll("[data-evidence-panel]").forEach((item) => {
+    item.classList.toggle("is-current", item.dataset.evidencePanel === panel);
+  });
+
+  updateEvidenceStepDetail();
+};
+
+const stopEvidenceJourneyTimer = () => {
+  window.clearInterval(evidenceJourneyTimer);
+  evidenceJourneyTimer = 0;
+};
+
+const startEvidenceJourneyTimer = () => {
+  if (reduceMotion || userSelectedEvidenceStep || evidenceJourneyTimer) return;
+  evidenceJourneyTimer = window.setInterval(() => {
+    if (userSelectedEvidenceStep || document.hidden) return;
+    const nextIndex = (evidenceStepOrder.indexOf(currentEvidenceStep) + 1) % evidenceStepOrder.length;
+    activateEvidenceStep(evidenceStepOrder[nextIndex]);
+  }, 4200);
+};
+
 const activateLayer = (layer) => {
   if (!layerOrder.includes(layer) || !layerDetails[layer]) return;
   currentLayer = layer;
@@ -1204,6 +1323,12 @@ const activateLayer = (layer) => {
 
   document.querySelectorAll("[data-sequence-layer]").forEach((item) => {
     const active = item.dataset.sequenceLayer === layer;
+    item.classList.toggle("is-current", active);
+    item.setAttribute("aria-pressed", String(active));
+  });
+
+  document.querySelectorAll("[data-proof-hotspot]").forEach((item) => {
+    const active = item.dataset.proofHotspot === layer;
     item.classList.toggle("is-current", active);
     item.setAttribute("aria-pressed", String(active));
   });
@@ -1248,7 +1373,7 @@ if (!reduceMotion && finePointer) {
     { passive: true },
   );
 
-  document.querySelectorAll(".hero-art, .audience-card, .case-card, .stack-panel, .path-step").forEach((surface) => {
+  document.querySelectorAll(".hero-art, .audience-card, .case-card, .stack-panel, .path-step, .evidence-shot-card, .repo-card").forEach((surface) => {
     surface.addEventListener("pointermove", (event) => setLocalPointerVars(surface, event), {
       passive: true,
     });
@@ -1318,6 +1443,7 @@ const applyLanguage = (lang, options = {}) => {
     applyPageLanguageText(lang);
     updateNetworkInspector();
     updateLayerDetail();
+    updateEvidenceStepDetail();
     document.body.classList.remove("is-switching");
   }, reduceMotion || options.instant ? 0 : 120);
 };
@@ -1346,6 +1472,15 @@ document.querySelectorAll("[data-network-mode]").forEach((button) => {
   button.addEventListener("click", () => activateNetworkMode(button.dataset.networkMode, true));
 });
 
+document.querySelectorAll("[data-evidence-step]").forEach((button) => {
+  const step = button.dataset.evidenceStep;
+  button.addEventListener("click", () => activateEvidenceStep(step, true));
+  button.addEventListener("focus", () => activateEvidenceStep(step, true));
+  if (finePointer) {
+    button.addEventListener("pointerenter", () => activateEvidenceStep(step));
+  }
+});
+
 if (!reduceMotion) {
   window.setInterval(() => {
     if (userSelectedNetworkMode || document.hidden) return;
@@ -1355,13 +1490,33 @@ if (!reduceMotion) {
 }
 
 document.querySelectorAll("[data-layer]").forEach((button) => {
-  button.addEventListener("click", () => activateLayer(button.dataset.layer));
+  const layer = button.dataset.layer;
+  button.addEventListener("click", () => activateLayer(layer));
+  button.addEventListener("focus", () => activateLayer(layer));
+  if (finePointer) {
+    button.addEventListener("pointerenter", () => activateLayer(layer));
+  }
 });
 
 document.querySelectorAll("[data-sequence-layer]").forEach((button) => {
-  button.addEventListener("click", () => activateLayer(button.dataset.sequenceLayer));
+  const layer = button.dataset.sequenceLayer;
+  button.addEventListener("click", () => activateLayer(layer));
+  button.addEventListener("focus", () => activateLayer(layer));
+  if (finePointer) {
+    button.addEventListener("pointerenter", () => activateLayer(layer));
+  }
 });
 
+document.querySelectorAll("[data-proof-hotspot]").forEach((button) => {
+  const layer = button.dataset.proofHotspot;
+  button.addEventListener("click", () => activateLayer(layer));
+  button.addEventListener("focus", () => activateLayer(layer));
+  if (finePointer) {
+    button.addEventListener("pointerenter", () => activateLayer(layer));
+  }
+});
+
+activateEvidenceStep(currentEvidenceStep);
 activateLayer(currentLayer);
 
 const animateMetric = (metric) => {
@@ -1511,6 +1666,26 @@ if ("IntersectionObserver" in window) {
     },
   );
   pathSteps.forEach((step) => pathObserver.observe(step));
+
+  const evidenceJourney = document.querySelector(".evidence-journey");
+  if (evidenceJourney) {
+    const evidenceObserver = new IntersectionObserver(
+      (entries) => {
+        const visible = entries.some((entry) => entry.isIntersecting);
+        if (visible) {
+          activateEvidenceStep(currentEvidenceStep);
+          startEvidenceJourneyTimer();
+        } else {
+          stopEvidenceJourneyTimer();
+        }
+      },
+      {
+        rootMargin: "-20% 0px -30% 0px",
+        threshold: 0.24,
+      },
+    );
+    evidenceObserver.observe(evidenceJourney);
+  }
 
   const sequenceSteps = Array.from(document.querySelectorAll("[data-sequence-layer]"));
   if (!reduceMotion && sequenceSteps.length) {
