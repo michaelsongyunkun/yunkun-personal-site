@@ -1,11 +1,12 @@
 const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-const introStorageKey = "yunkun-ai-education-core-v2";
+const introStorageKey = "yunkun-ai-education-core-v3";
 const languageStorageKey = "yunkun-site-language";
 
 const aiIntro = document.getElementById("aiIntro");
 const aiIntroCanvas = document.getElementById("aiIntroCanvas");
 const aiIntroCtx = aiIntroCanvas?.getContext("2d");
 const aiIntroStatus = document.getElementById("aiIntroStatus");
+const aiIntroStory = document.getElementById("aiIntroStory");
 const aiIntroSkip = document.getElementById("aiIntroSkip");
 let aiIntroFrame = 0;
 let aiIntroTimer = 0;
@@ -30,22 +31,68 @@ const writeIntroPlayed = () => {
   }
 };
 
-const introStatusFrames = [
-  [0, "EDUCATION CORE OFFLINE"],
-  [0.08, "STUDENT SIGNAL DETECTED"],
-  [0.18, "PROFILE GRAPH BUILDING"],
-  [0.3, "SCHOOL CONTEXT RETRIEVED"],
-  [0.42, "STRATEGY ENGINE IGNITING"],
-  [0.54, "AI ADVISING CORE ONLINE"],
-  [0.66, "AGENTS ORCHESTRATED"],
-  [0.78, "OPENING EDUCATION CONSOLE"],
-  [0.92, "EVIDENCE HANDOFF"],
+const introStoryFrames = [
+  {
+    at: 0,
+    stage: "idle",
+    status: "EDUCATION CORE OFFLINE",
+    story: "A quiet console waits for student context.",
+  },
+  {
+    at: 0.08,
+    stage: "signal",
+    status: "STUDENT SIGNAL DETECTED",
+    story: "Goals, scores, activities, and family constraints arrive as scattered signals.",
+  },
+  {
+    at: 0.2,
+    stage: "profile",
+    status: "PROFILE GRAPH BUILDING",
+    story: "The loose inputs become a student profile graph that can be reasoned about.",
+  },
+  {
+    at: 0.34,
+    stage: "context",
+    status: "SCHOOL CONTEXT RETRIEVED",
+    story: "RAG pulls school context, research notes, and application rules into the graph.",
+  },
+  {
+    at: 0.48,
+    stage: "strategy",
+    status: "PLAN ROUTE GENERATED",
+    story: "School fit, activity planning, timeline, essay direction, and risk checks branch out.",
+  },
+  {
+    at: 0.62,
+    stage: "agents",
+    status: "AGENT WORKFLOW RUNNING",
+    story: "Researching, planning, building, testing, and advising pass the work forward.",
+  },
+  {
+    at: 0.76,
+    stage: "evidence",
+    status: "TEST EVIDENCE VERIFIED",
+    story: "The system hands off screenshot, GitHub, tests, and resume as inspectable proof.",
+  },
+  {
+    at: 0.9,
+    stage: "ready",
+    status: "EVIDENCE READY",
+    story: "The opening collapses into the portfolio console.",
+  },
+  {
+    at: 0.96,
+    stage: "open",
+    status: "OPENING CONSOLE",
+    story: "AI education product evidence is ready to inspect.",
+  },
 ];
 
 const setIntroStatus = (progress) => {
-  if (!aiIntroStatus) return;
-  const frame = introStatusFrames.reduce((active, item) => (progress >= item[0] ? item : active), introStatusFrames[0]);
-  aiIntroStatus.textContent = frame[1];
+  const frame = introStoryFrames.reduce((active, item) => (progress >= item.at ? item : active), introStoryFrames[0]);
+  if (aiIntroStatus) aiIntroStatus.textContent = frame.status;
+  if (aiIntroStory) aiIntroStory.textContent = frame.story;
+  if (aiIntro) aiIntro.dataset.introStage = frame.stage;
 };
 
 const resizeAiIntroCanvas = () => {
@@ -97,13 +144,22 @@ const drawAiIntro = (now) => {
   const height = aiIntroCanvas.clientHeight;
   const elapsed = now - aiIntroStart;
   const progress = clampIntro(elapsed / 8000);
-  const tokenProgress = easeOutCubic(segmentProgress(progress, 0.1, 0.32));
-  const networkProgress = easeOutCubic(segmentProgress(progress, 0.24, 0.48));
-  const ignitionProgress = easeOutCubic(segmentProgress(progress, 0.44, 0.58));
-  const agentProgress = easeOutCubic(segmentProgress(progress, 0.62, 0.76));
-  const portalProgress = easeOutCubic(segmentProgress(progress, 0.78, 0.98));
+  const signalProgress = easeOutCubic(segmentProgress(progress, 0.08, 0.24));
+  const profileProgress = easeOutCubic(segmentProgress(progress, 0.18, 0.36));
+  const contextProgress = easeOutCubic(segmentProgress(progress, 0.32, 0.52));
+  const strategyProgress = easeOutCubic(segmentProgress(progress, 0.46, 0.66));
+  const agentProgress = easeOutCubic(segmentProgress(progress, 0.58, 0.78));
+  const evidenceProgress = easeOutCubic(segmentProgress(progress, 0.72, 0.9));
+  const portalProgress = easeOutCubic(segmentProgress(progress, 0.86, 0.99));
   const centerX = width * 0.5;
   const centerY = height * 0.5;
+  const routePoints = [
+    { angle: -1.05, distance: 0.23, squash: 0.58 },
+    { angle: -0.5, distance: 0.28, squash: 0.62 },
+    { angle: 0.1, distance: 0.31, squash: 0.54 },
+    { angle: 0.72, distance: 0.27, squash: 0.6 },
+    { angle: 1.32, distance: 0.22, squash: 0.68 },
+  ];
 
   setIntroStatus(progress);
   aiIntroCtx.clearRect(0, 0, width, height);
@@ -121,21 +177,21 @@ const drawAiIntro = (now) => {
 
   aiIntroParticles.forEach((particle, index) => {
     const drift = Math.sin(elapsed * 0.0012 + particle.phase) * 18;
-    const x = particle.fromX + (particle.targetX - particle.fromX) * tokenProgress + Math.cos(particle.phase) * drift * (1 - networkProgress);
-    const y = particle.fromY + (particle.targetY - particle.fromY) * tokenProgress + Math.sin(particle.phase) * drift * (1 - networkProgress);
+    const x = particle.fromX + (particle.targetX - particle.fromX) * signalProgress + Math.cos(particle.phase) * drift * (1 - profileProgress);
+    const y = particle.fromY + (particle.targetY - particle.fromY) * signalProgress + Math.sin(particle.phase) * drift * (1 - profileProgress);
     particle.x = x + Math.cos(elapsed * 0.0004 + particle.phase) * 10 * agentProgress;
     particle.y = y + Math.sin(elapsed * 0.0005 + particle.phase) * 8 * agentProgress;
 
     const active = particle.group === index % 5;
     aiIntroCtx.fillStyle = active ? "rgba(220,228,255,0.88)" : "rgba(95,125,255,0.58)";
-    aiIntroCtx.globalAlpha = 0.15 + tokenProgress * 0.7 - portalProgress * 0.42;
+    aiIntroCtx.globalAlpha = 0.12 + signalProgress * 0.64 + contextProgress * 0.12 - portalProgress * 0.42;
     aiIntroCtx.beginPath();
-    aiIntroCtx.arc(particle.x, particle.y, particle.size + ignitionProgress * 0.9, 0, Math.PI * 2);
+    aiIntroCtx.arc(particle.x, particle.y, particle.size + strategyProgress * 0.9, 0, Math.PI * 2);
     aiIntroCtx.fill();
 
-    if (index % 5 === 0 && tokenProgress > 0.08 && tokenProgress < 0.88) {
+    if (index % 5 === 0 && signalProgress > 0.08 && signalProgress < 0.88) {
       aiIntroCtx.strokeStyle = "rgba(142,164,255,0.26)";
-      aiIntroCtx.globalAlpha = (1 - Math.abs(tokenProgress - 0.45)) * 0.34;
+      aiIntroCtx.globalAlpha = (1 - Math.abs(signalProgress - 0.45)) * 0.34;
       aiIntroCtx.lineWidth = 1;
       aiIntroCtx.beginPath();
       aiIntroCtx.moveTo(particle.fromX, particle.fromY);
@@ -144,7 +200,7 @@ const drawAiIntro = (now) => {
     }
   });
 
-  if (networkProgress > 0.12) {
+  if (profileProgress > 0.12) {
     for (let i = 0; i < aiIntroParticles.length; i += 1) {
       for (let j = i + 1; j < aiIntroParticles.length; j += 1) {
         if ((i + j) % 7 !== 0) continue;
@@ -155,7 +211,7 @@ const drawAiIntro = (now) => {
         const distance = Math.sqrt(dx * dx + dy * dy);
         if (distance > 118) continue;
         aiIntroCtx.strokeStyle = "rgba(120,148,255,0.34)";
-        aiIntroCtx.globalAlpha = (1 - distance / 118) * networkProgress * (1 - portalProgress * 0.7);
+        aiIntroCtx.globalAlpha = (1 - distance / 118) * profileProgress * (1 - portalProgress * 0.7);
         aiIntroCtx.lineWidth = 0.8;
         aiIntroCtx.beginPath();
         aiIntroCtx.moveTo(a.x, a.y);
@@ -165,15 +221,44 @@ const drawAiIntro = (now) => {
     }
   }
 
-  if (ignitionProgress > 0) {
-    const shock = ignitionProgress * Math.max(width, height) * 0.58;
-    const shockAlpha = Math.sin(ignitionProgress * Math.PI);
+  if (contextProgress > 0) {
+    const contextRadius = 110 + contextProgress * Math.min(width, height) * 0.28;
+    aiIntroCtx.strokeStyle = "rgba(180,198,255,0.34)";
+    aiIntroCtx.globalAlpha = Math.sin(contextProgress * Math.PI) * 0.42 * (1 - portalProgress * 0.35);
+    aiIntroCtx.lineWidth = 1.4;
+    aiIntroCtx.beginPath();
+    aiIntroCtx.ellipse(centerX, centerY, contextRadius, contextRadius * 0.46, 0, 0, Math.PI * 2);
+    aiIntroCtx.stroke();
+  }
+
+  if (strategyProgress > 0) {
+    const shock = strategyProgress * Math.max(width, height) * 0.36;
+    const shockAlpha = Math.sin(strategyProgress * Math.PI);
     aiIntroCtx.strokeStyle = "rgba(245,248,255,0.9)";
-    aiIntroCtx.globalAlpha = shockAlpha * 0.55;
-    aiIntroCtx.lineWidth = 2 + ignitionProgress * 5;
+    aiIntroCtx.globalAlpha = shockAlpha * 0.34;
+    aiIntroCtx.lineWidth = 1.6 + strategyProgress * 3.2;
     aiIntroCtx.beginPath();
     aiIntroCtx.arc(centerX, centerY, shock, 0, Math.PI * 2);
     aiIntroCtx.stroke();
+
+    routePoints.forEach((route, index) => {
+      const length = Math.min(width, height) * route.distance;
+      const pointProgress = clampIntro((strategyProgress - index * 0.08) / 0.72);
+      const routeX = centerX + Math.cos(route.angle) * length * pointProgress;
+      const routeY = centerY + Math.sin(route.angle) * length * route.squash * pointProgress;
+      aiIntroCtx.strokeStyle = index % 2 === 0 ? "rgba(180,198,255,0.62)" : "rgba(95,125,255,0.56)";
+      aiIntroCtx.globalAlpha = pointProgress * (1 - evidenceProgress * 0.42);
+      aiIntroCtx.lineWidth = 1.2;
+      aiIntroCtx.beginPath();
+      aiIntroCtx.moveTo(centerX, centerY);
+      aiIntroCtx.lineTo(routeX, routeY);
+      aiIntroCtx.stroke();
+      aiIntroCtx.fillStyle = "rgba(245,248,255,0.9)";
+      aiIntroCtx.globalAlpha = pointProgress * 0.72;
+      aiIntroCtx.beginPath();
+      aiIntroCtx.arc(routeX, routeY, 2.4 + pointProgress * 1.8, 0, Math.PI * 2);
+      aiIntroCtx.fill();
+    });
   }
 
   aiIntroSignals.forEach((signal, index) => {
@@ -194,6 +279,27 @@ const drawAiIntro = (now) => {
     aiIntroCtx.arc(x, y, index % 3 === 0 ? 3 : 2, 0, Math.PI * 2);
     aiIntroCtx.fill();
   });
+
+  if (evidenceProgress > 0) {
+    const proofRadius = 72 + evidenceProgress * Math.min(width, height) * 0.18;
+    const proofAlpha = Math.sin(evidenceProgress * Math.PI) * 0.58 + evidenceProgress * 0.16;
+    aiIntroCtx.strokeStyle = "rgba(120,255,205,0.42)";
+    aiIntroCtx.globalAlpha = proofAlpha * (1 - portalProgress * 0.38);
+    aiIntroCtx.lineWidth = 1.2;
+    for (let index = 0; index < 4; index += 1) {
+      const angle = -Math.PI / 4 + index * (Math.PI / 2);
+      const x = centerX + Math.cos(angle) * proofRadius;
+      const y = centerY + Math.sin(angle) * proofRadius * 0.64;
+      aiIntroCtx.beginPath();
+      aiIntroCtx.moveTo(centerX, centerY);
+      aiIntroCtx.lineTo(x, y);
+      aiIntroCtx.stroke();
+      aiIntroCtx.fillStyle = index === 2 ? "rgba(120,255,205,0.92)" : "rgba(245,248,255,0.9)";
+      aiIntroCtx.beginPath();
+      aiIntroCtx.arc(x, y, 3.2 + evidenceProgress * 1.6, 0, Math.PI * 2);
+      aiIntroCtx.fill();
+    }
+  }
 
   if (portalProgress > 0) {
     const portalRadius = 80 + portalProgress * Math.max(width, height) * 0.68;
@@ -771,7 +877,7 @@ const pageLanguageText = {
     ["#hero-title", "Song Yunkun"],
     [".hero-kicker", "AI Education Product Builder / Application Planning System / GitHub Evidence"],
     [".hero-subtitle", "I build AI education products that turn student context, planning logic, and engineering proof into working systems."],
-    [".hero-actions .button:nth-child(1)", "View Core Work"],
+    [".hero-actions .button:nth-child(1)", "View Work"],
     [".hero-actions .button:nth-child(2)", "Download Resume"],
     [".proof-band article:nth-child(1) span", "GitHub repositories"],
     ["#metric-detail-zero", "The personal site and US College Compass both have accessible repository evidence."],
@@ -785,8 +891,16 @@ const pageLanguageText = {
     ["#metric-detail-four", "Evidence from search exposure, content structure, and conversion-language optimization."],
     [".proof-band article:nth-child(6) span", "performance p95"],
     ["#metric-detail-five", "Local performance smoke stayed under the threshold for portfolio-grade product proof."],
-    ["#evidence-title", "Evidence chain"],
-    [".evidence-console-section .section-intro p", "Screenshots, repositories, tests, and research prove that the AI education work is shipped, inspectable, and verifiable."],
+    ["#reader-path-title", "Reader paths"],
+    [".reader-path-section .section-intro p", "The homepage establishes positioning in 30 seconds. Choose the review path that matches your purpose, then go deeper into work, research, or contact."],
+    [".reader-path-card:nth-child(1) h3", "Start with education credibility"],
+    [".reader-path-card:nth-child(1) p", "For admissions readers and mentors: research, education background, method, and sustained commitment to student decision-making."],
+    [".reader-path-card:nth-child(2) h3", "Start with delivery proof"],
+    [".reader-path-card:nth-child(2) p", "For recruiters: flagship products, GitHub, tests, and real screenshots show that AI ideas became working systems."],
+    ["#flagship-proof-title", "Flagship proof"],
+    [".flagship-proof-section .section-intro p", "The homepage keeps the strongest proof up front: US College Compass as the flagship, with two core projects as delivery support."],
+    ["#evidence-title", "Evidence snapshot"],
+    [".evidence-console-section .section-intro p", "Screenshots, repositories, tests, and research sit in one proof flow so readers can quickly judge whether the work is real and inspectable."],
     [".evidence-shot-copy span", "Real product screenshot"],
     [".evidence-shot-copy h3", "US College Compass"],
     [".evidence-shot-copy p", "The live workspace shows student profiles, planning flow, DeepSeek optimization, and versioned application planning."],
@@ -801,33 +915,25 @@ const pageLanguageText = {
     [".evidence-step[data-evidence-step='tests'] strong", "Verification chain"],
     [".evidence-step[data-evidence-step='research'] strong", "Research backing"],
     [".evidence-step[data-evidence-step='resume'] strong", "Resume route"],
-    ["#site-map-title", "Start from the right page"],
-    [".route-section .section-intro p", "The homepage helps readers judge identity and proof fast. Background, work, research, archive, and contact each have their own page."],
-    [".route-section .route-card:nth-child(1) h3", "Background and method"],
-    [".route-section .route-card:nth-child(1) p", "For admissions officers, mentors, and recruiters: background, decision style, capability matrix, and education-product method."],
-    [".route-section .route-card:nth-child(2) h3", "Core work"],
-    [".route-section .route-card:nth-child(2) p", "Three representative case studies across AI education, content growth, and recruiting-evaluation workflows."],
-    [".route-section .route-card:nth-child(3) h3", "Research"],
-    [".route-section .route-card:nth-child(3) p", "Turn Google Scholar papers, DOI records, modeling methods, and education research into an interactive evidence chain."],
-    [".route-section .route-card:nth-child(4) h3", "AI long-form novel"],
-    [".route-section .route-card:nth-child(4) p", "A long-form AI-assisted fiction project showing worldbuilding, character systems, and chapter-structure design."],
-    [".route-section .route-card:nth-child(5) h3", "Project archive"],
-    [".route-section .route-card:nth-child(5) p", "A scannable wall of AI demos, research assets, tool prototypes, and long-term requirement pools."],
-    [".route-section .route-card:nth-child(6) h3", "Contact entry"],
-    [".route-section .route-card:nth-child(6) p", "Email, phone, Google Scholar, resume, and the right context for continuing the conversation."],
-    ["#featured-title", "Featured work"],
-    [".work-section .section-intro p", "The homepage keeps the highlights concise. Full case studies live on the Work page."],
     [".summary-card:nth-child(1) h3", "AI US Application Planning Workspace"],
     [".summary-card:nth-child(1) p", "Student profiles, DeepSeek planning, RAG Q&A, school encyclopedia, quality checks, and Word / JSON export."],
     [".summary-card:nth-child(2) h3", "Xiaohongshu Copywriting Assistant"],
     [".summary-card:nth-child(2) p", "A content-generation workflow from brief to title, body copy, tags, publishing advice, and history."],
     [".summary-card:nth-child(3) p", "A local-first workspace for job criteria, resume parsing, scoring, interview guides, audit support, and final human decisions."],
-    [".section-actions .button:nth-child(1)", "Open Work"],
-    [".section-actions .button:nth-child(2)", "View Archive"],
+    [".flagship-proof-section .section-actions .button:nth-child(1)", "View Work"],
+    [".flagship-proof-section .section-actions .button:nth-child(2)", "View Research"],
+    ["#more-evidence-title", "More evidence"],
+    [".more-evidence-section .section-intro p", "These two entries remain as long-tail proof. They no longer compete with Work or Research as primary paths."],
+    [".secondary-evidence-card:nth-child(1) h3", "AI-assisted long-form creation proof"],
+    [".secondary-evidence-card:nth-child(1) p", "Inverse Fate Furnace shows long-form structure, world rules, terminology consistency, and AI-assisted output capacity."],
+    [".secondary-evidence-card:nth-child(2) h3", "Categorized project archive"],
+    [".secondary-evidence-card:nth-child(2) p", "Scan more demos and delivery assets by Education, Growth, Workflow, Creative, and Life Tools."],
   ],
   "about.html": [
-    ["#about-title", "Turning education judgment into verifiable systems"],
-    [".page-masthead > p:not(.hero-kicker)", "My work connects math education, AI workflows, product planning, and engineering delivery into one evidence chain: understand real student contexts, define the judgment boundaries, ship runnable prototypes, and verify them through tests and feedback."],
+    ["#about-title", "Background, method, and dual reader paths"],
+    [".page-masthead > p:not(.hero-kicker)", "The About page explains who I am, how I reason about education problems, and why the same experience can serve admissions readers, mentors, and internship recruiters."],
+    [".page-masthead .hero-actions .button:nth-child(1)", "View Work"],
+    [".page-masthead .hero-actions .button:nth-child(2)", "Download Resume"],
     ["#audience-title", "Two review modes"],
     [".audience-section .section-intro p", "The same experience has to work for two audiences: admissions readers look for long-term commitment and credibility; recruiters look for product judgment and engineering delivery."],
     [".audience-card:nth-child(1) h3", "Using AI to strengthen education decisions"],
@@ -854,10 +960,12 @@ const pageLanguageText = {
   ],
   "work.html": [
     [".page-masthead .hero-kicker", "Work / Evidence-Led Case Studies"],
-    ["#work-page-title", "Core projects and evidence chain"],
-    [".page-masthead > p:not(.hero-kicker)", "This page leads with real screenshots, GitHub repositories, tests, and product judgment so readers can verify that the AI education work is shipped."],
-    ["#work-title", "Flagship proof"],
-    [".work-section .section-intro p", "The main case starts with visible proof, then explains the problem, system, repository, and verification results."],
+    ["#work-page-title", "Project proof and inspectable evidence"],
+    [".page-masthead > p:not(.hero-kicker)", "The Work page proves product delivery: US College Compass comes first, followed by two core projects, then repository, test, and screenshot evidence."],
+    [".page-masthead .hero-actions .button:nth-child(1)", "Contact"],
+    [".page-masthead .hero-actions .button:nth-child(2)", "Download Resume"],
+    ["#work-title", "Flagship product proof"],
+    [".work-section .section-intro p", "The main case starts with visible proof, then explains the problem, system, repository, and verification results. The next two cases support delivery breadth."],
     [".case-card:nth-child(1) .case-role", "AI Product Manager / Independent Developer"],
     [".case-card:nth-child(1) h3", "AI US Application Planning Workspace"],
     [".case-card:nth-child(1) .case-copy > p:nth-of-type(2)", "A planning platform for international students and families, combining student profiles, DeepSeek plans, resource-library RAG, school data, activity checks, export, and backend auth."],
@@ -890,12 +998,18 @@ const pageLanguageText = {
     [".repo-grid-wide .repo-card:nth-child(2) h3", "AI Education Console"],
     [".repo-grid-wide .repo-card:nth-child(2) p", "A bilingual static site with AI opening, ambient canvas, Work sticky case, research page, archive wall, and reduced-motion support."],
     [".repo-grid-wide .repo-card:nth-child(2) b", "static HTML, CSS, vanilla JS, canvas motion"],
-    [".work-section .section-actions .button:nth-child(1)", "View more archives"],
+    [".work-section .section-actions .button:nth-child(1)", "Contact"],
     [".work-section .section-actions .button:nth-child(2)", "Download Resume"],
+    ["#work-more-evidence-title", "More evidence"],
+    [".more-evidence-section .section-intro p", "If you need longer-tail proof, continue into Novel and Archive. They are supporting evidence, not the main Work page path."],
+    [".more-evidence-section .route-card:nth-child(1) h3", "AI-assisted long-form creation proof"],
+    [".more-evidence-section .route-card:nth-child(1) p", "Shows long-form narrative structure, world rules, and sustained AI-assisted output capacity."],
+    [".more-evidence-section .route-card:nth-child(2) h3", "Categorized project archive"],
+    [".more-evidence-section .route-card:nth-child(2) p", "Review more demos and delivery assets by Education, Growth, Workflow, Creative, and Life Tools."],
   ],
   "research.html": [
-    ["#research-title", "Research as an interactive evidence chain"],
-    [".research-masthead-copy > p:not(.hero-kicker)", "This page is not a static publication list. It gives readers a path from credible sources, to modeling methods, to how the research informs AI education products."],
+    ["#research-title", "Research credibility and method evidence"],
+    [".research-masthead-copy > p:not(.hero-kicker)", "The Research page proves academic credibility: start with trusted sources, then modeling methods, then how the research supports education product judgment."],
     [".research-masthead .hero-actions .button:nth-child(2)", "View publications"],
     [".research-proof article:nth-child(1) span", "public paper records"],
     ["#research-metric-one", "DOI and author records verifiable through Semantic Scholar and Crossref."],
@@ -924,7 +1038,7 @@ const pageLanguageText = {
   ],
   "novel.html": [
     ["#novel-title", "Inverse Fate Furnace"],
-    [".novel-masthead > p:not(.hero-kicker)", "A long-form AI-assisted xianxia novel: Lin Ye rises from the ash of an alchemy furnace and uses an old-law system built from furnace, ash, fire, name, lamp, proof, and debt to push back against sects, old clans, the Su family, and Qingya's old debts."],
+    [".novel-masthead > p:not(.hero-kicker)", "This is a secondary proof page for the personal site: a long-form AI-assisted xianxia novel. Lin Ye rises from the ash of an alchemy furnace and uses an old-law system built from furnace, ash, fire, name, lamp, proof, and debt to push back against sects, old clans, the Su family, and Qingya's old debts."],
     [".novel-masthead .hero-actions .button:nth-child(1)", "View structure"],
     [".novel-masthead .hero-actions .button:nth-child(2)", "View creative system"],
     [".novel-proof article:nth-child(1) span", "completed chapters"],
@@ -956,7 +1070,7 @@ const pageLanguageText = {
     ["#archive-page-title", "A project archive for the long tail of experiments"],
     [".page-masthead > p:not(.hero-kicker)", "The Archive keeps the homepage focused while preserving a dense scan of AI demos, document workflows, entertainment tests, daily-life tools, and product-planning assets."],
     ["#archive-title", "Archive Wall"],
-    [".archive-section .section-intro p", "Research, education, growth, and delivery outcomes are organized as scannable evidence cards."],
+    [".archive-section .section-intro p", "Research, education, growth, and delivery outcomes are organized as scannable evidence cards, with education and delivery projects first by default."],
     [".archive-item:nth-child(1) .archive-front-copy span", "Flagship education system"],
     [".archive-item:nth-child(1) h3", "US Application Planning Agent"],
     [".archive-item:nth-child(1) .archive-front-copy p", "Student profiles, school knowledge, activity planning, and quality checks are organized into a testable application-strategy console."],
@@ -993,22 +1107,26 @@ const pageLanguageText = {
   "contact.html": [
     ["#contact-page-title", "Contact and next steps"],
     [".page-masthead > p:not(.hero-kicker)", "If you are an admissions officer, project mentor, or internship recruiter, use the work, research, and delivery evidence to decide whether we should talk."],
+    [".page-masthead .hero-actions .button:nth-child(1)", "Contact"],
+    [".page-masthead .hero-actions .button:nth-child(2)", "Download Resume"],
     ["#contact-title", "Open the education console."],
     [".contact-copy p", "Good reasons to reach out include AI education products, application-planning systems, RAG or agent prototypes, growth-content tools, AI product-management internships, and education-technology collaborations."],
     [".contact-actions .button:nth-child(2)", "Phone"],
     [".contact-actions .button:nth-child(4)", "Resume"],
     ["#contact-routes-title", "Before reaching out"],
-    [".route-section .section-intro p", "Different readers can start from different pages, so nobody has to scroll through one overloaded long page."],
-    [".route-card:nth-child(1) h3", "Start with About"],
-    [".route-card:nth-child(1) p", "Understand the education background, research credibility, product method, and capability matrix."],
-    [".route-card:nth-child(2) h3", "Start with Work"],
-    [".route-card:nth-child(2) p", "Quickly evaluate core projects, engineering delivery, and AI product-management ability."],
-    [".route-card:nth-child(3) h3", "Then read Research"],
-    [".route-card:nth-child(3) p", "Verify Scholar papers, DOI records, modeling methods, and education-research evidence."],
-    [".route-card:nth-child(4) h3", "Also read Novel"],
-    [".route-card:nth-child(4) p", "Understand AI-assisted long-form creation, worldbuilding systems, and sustained content production."],
-    [".route-card:nth-child(5) h3", "Then scan Archive"],
-    [".route-card:nth-child(5) p", "See more demos, document workflows, daily-life prototypes, and requirement assets."],
+    [".route-section .section-intro p", "If you need one more check, jump back into the most relevant primary page."],
+    [".route-section .route-card:nth-child(1) h3", "View Work"],
+    [".route-section .route-card:nth-child(1) p", "Quickly evaluate core projects, engineering delivery, and AI product-management ability."],
+    [".route-section .route-card:nth-child(2) h3", "View Research"],
+    [".route-section .route-card:nth-child(2) p", "Verify Scholar papers, DOI records, modeling methods, and education-research evidence."],
+    [".route-section .route-card:nth-child(3) h3", "View Background"],
+    [".route-section .route-card:nth-child(3) p", "Understand the education background, dual reader modes, product method, and capability matrix."],
+    ["#contact-more-evidence-title", "More evidence"],
+    [".more-evidence-section .section-intro p", "Novel and Archive remain as supporting proof for readers who want a broader sample."],
+    [".more-evidence-section .route-card:nth-child(1) h3", "AI-assisted long-form creation proof"],
+    [".more-evidence-section .route-card:nth-child(1) p", "Understand AI-assisted long-form creation, worldbuilding systems, and sustained content production."],
+    [".more-evidence-section .route-card:nth-child(2) h3", "Categorized project archive"],
+    [".more-evidence-section .route-card:nth-child(2) p", "See more demos, document workflows, daily-life prototypes, and requirement assets."],
   ],
 };
 
@@ -1016,11 +1134,11 @@ const pageLanguageGroups = {
   "index.html": [
     [
       ".top-nav a",
-      ["Home", "About", "Work", "Research", "Novel", "Contact"],
+      ["Home", "Work", "Research", "About", "Contact"],
     ],
     [
       ".route-card span",
-      ["01 / About", "02 / Work", "03 / Research", "04 / Novel", "05 / Archive", "06 / Contact"],
+      ["Admissions / Mentor", "Recruiting", "Novel / Secondary proof", "Archive / Long-tail proof"],
     ],
     [
       ".summary-card span",
@@ -1030,7 +1148,7 @@ const pageLanguageGroups = {
   "about.html": [
     [
       ".top-nav a",
-      ["Home", "About", "Work", "Research", "Novel", "Contact"],
+      ["Home", "Work", "Research", "About", "Contact"],
     ],
     [
       ".tab",
@@ -1054,13 +1172,13 @@ const pageLanguageGroups = {
   "work.html": [
     [
       ".top-nav a",
-      ["Home", "About", "Work", "Research", "Novel", "Contact"],
+      ["Home", "Work", "Research", "About", "Contact"],
     ],
   ],
   "research.html": [
     [
       ".top-nav a",
-      ["Home", "About", "Work", "Research", "Novel", "Contact"],
+      ["Home", "Work", "Research", "About", "Contact"],
     ],
     [
       ".paper-tags li",
@@ -1074,7 +1192,7 @@ const pageLanguageGroups = {
   "novel.html": [
     [
       ".top-nav a",
-      ["Home", "About", "Work", "Research", "Novel", "Contact"],
+      ["Home", "Work", "Research", "About", "Contact"],
     ],
     [
       ".novel-arc h3",
@@ -1129,7 +1247,7 @@ const pageLanguageGroups = {
   "archive.html": [
     [
       ".top-nav a",
-      ["Home", "About", "Work", "Research", "Novel", "Contact"],
+      ["Home", "Work", "Research", "About", "Contact"],
     ],
     [
       ".archive-back > p",
@@ -1193,7 +1311,7 @@ const pageLanguageGroups = {
   "contact.html": [
     [
       ".top-nav a",
-      ["Home", "About", "Work", "Research", "Novel", "Contact"],
+      ["Home", "Work", "Research", "About", "Contact"],
     ],
   ],
 };
@@ -1226,6 +1344,26 @@ const applyPageLanguageText = (lang) => {
     });
   });
 };
+
+const archiveFilterButtons = Array.from(document.querySelectorAll("[data-archive-filter]"));
+const archiveItems = Array.from(document.querySelectorAll("[data-archive-category]"));
+
+const setArchiveFilter = (filter) => {
+  archiveFilterButtons.forEach((button) => {
+    const active = button.dataset.archiveFilter === filter;
+    button.classList.toggle("is-active", active);
+    button.setAttribute("aria-pressed", String(active));
+  });
+
+  archiveItems.forEach((item) => {
+    const visible = filter === "all" || item.dataset.archiveCategory === filter;
+    item.hidden = !visible;
+  });
+};
+
+archiveFilterButtons.forEach((button) => {
+  button.addEventListener("click", () => setArchiveFilter(button.dataset.archiveFilter || "all"));
+});
 
 const updateLanguageToggles = (lang) => {
   document.querySelectorAll("[data-lang-toggle]").forEach((button) => {
